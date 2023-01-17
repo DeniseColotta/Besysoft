@@ -7,7 +7,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/peliculas")
 
-public class PeliculaController {
+public class PeliculaControlador {
 
 Datos datos =new Datos();
 

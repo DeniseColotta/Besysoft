@@ -2,11 +2,20 @@ package com.besysoft.bootcampspringboot.dominio;
 
 
 public class Personaje {
+    private long id;
     private String nombre;
     private int edad;
     private double peso;
     private String historia;
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -45,11 +54,12 @@ public class Personaje {
     public Personaje() {
     }
 
-    public Personaje(String nombre, int edad, double peso, String historia) {
+    public Personaje(long id,String nombre, int edad, double peso, String historia) {
         this.nombre = nombre;
         this.edad = edad;
         this.peso = peso;
         this.historia = historia;
+        this.id=id;
 
     }
 }

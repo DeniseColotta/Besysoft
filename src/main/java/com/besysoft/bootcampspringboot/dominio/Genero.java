@@ -3,8 +3,17 @@ package com.besysoft.bootcampspringboot.dominio;
 
 public class Genero {
 
+    private long id;
     private String nombre;
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -17,8 +26,8 @@ public class Genero {
     public Genero() {
     }
 
-    public Genero(String nombre) {
+    public Genero(long id, String nombre) {
+        this.id = id;
         this.nombre = nombre;
-
     }
 }

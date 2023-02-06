@@ -10,7 +10,7 @@ public class Fecha {
 
         DateTimeFormatter formateador = new DateTimeFormatterBuilder()
                 .parseCaseInsensitive()
-                .append(DateTimeFormatter.ofPattern("ddMMyyyy"))
+                .append(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                 .toFormatter();
 
         return LocalDate.parse(fecha, formateador);

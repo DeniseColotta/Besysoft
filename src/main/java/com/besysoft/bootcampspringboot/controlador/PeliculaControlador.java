@@ -1,10 +1,15 @@
 package com.besysoft.bootcampspringboot.controlador;
-import com.besysoft.bootcampspringboot.dominio.Genero;
-import com.besysoft.bootcampspringboot.dominio.PeliculaSerie;
-import com.besysoft.bootcampspringboot.utilidades.Datos;
+
+import com.besysoft.bootcampspringboot.Entidades.Genero;
+import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
+import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -12,61 +17,64 @@ import java.util.List;
 
 public class PeliculaControlador {
 
-Datos datos =new Datos();
+    @Autowired
+    private IPeliculaService pelicula;
 
     @GetMapping
-    public
-    ResponseEntity <List<PeliculaSerie>> listareliculaSerieP() {
-        List<Genero> generos = datos.crearGenero();
-        return ResponseEntity.ok().body(datos.crearPelicula(generos));
+    public ResponseEntity<List<PeliculaSerie>> listaPeliculaSerie() {
+
+        return ResponseEntity.ok().body(pelicula.getAll());
     }
 
-    @GetMapping(path="/titulos/{titulos}")
-    public ResponseEntity <?> filtrarPeliculaTitulo(@PathVariable("titulo") String tituloPelicula) {
-       return ResponseEntity.ok().body( datos.filtrarPeliculaTitulo(tituloPelicula));
+    @GetMapping(path = "/titulos/{titulos}")
+    public ResponseEntity<?> filtrarPeliculaTitulo(@PathVariable("titulos") String tituloPelicula) {
+        return ResponseEntity.ok().body(pelicula.filtrarPeliculaTitulo(tituloPelicula));
     }
 
-    @GetMapping(path="/generos/{generos}")
-    public ResponseEntity<List<PeliculaSerie>> filtrarPeliculaGenero(@PathVariable("genero") String nombreGenero) {
-        return ResponseEntity.ok().body(datos.peliculaPorGenero(nombreGenero));
-    }
 
-    @GetMapping(path= ("/calificaciones"))
-    ResponseEntity <?>peliculaPorRangoCalificacion(@RequestParam int desde, @RequestParam int hasta) {
+    @GetMapping(path = ("/calificaciones"))
+    ResponseEntity<?> peliculaPorRangoCalificacion(@RequestParam int desde, @RequestParam int hasta) {
         try {
-            return ResponseEntity.ok().body(datos.filtrarPeliculaPorCalificacion(desde, hasta));
-        }catch(RuntimeException ex){
-            return ResponseEntity.badRequest().body(ex.getMessage());
-        }
-    }
-    @GetMapping(path= "/fechas")
-    ResponseEntity <?>peliculaPorRangoFecha(
-             @RequestParam String desde, @RequestParam  String hasta) {
-
-        try {
-            return ResponseEntity.ok().body(datos.filtrarPeliculaPorFecha(desde, hasta));
-
+            return ResponseEntity.ok().body(pelicula.filtrarPeliculaPorCalificacion(desde, hasta));
         } catch (RuntimeException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
+
+    @GetMapping(path = "/fechas")
+    ResponseEntity<?> peliculaPorRangoFecha(
+            @RequestParam String desde, @RequestParam String hasta) {
+
+        try {
+            return ResponseEntity.ok().body(pelicula.filtrarPeliculaPorFecha(desde, hasta));
+
+        } catch (RuntimeException ex) {
+            return new ResponseEntity("Ingrese fecha con el formato ddMMyyyy", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping
-    public ResponseEntity <?> crearPelicula( @RequestBody PeliculaSerie peliculaNueva) {
+    public ResponseEntity<?> crearPelicula(@RequestBody PeliculaSerie peliculaNueva) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(datos.agregarPelicula(peliculaNueva));
+            return ResponseEntity.status(HttpStatus.CREATED).body(pelicula.agregarPelicula(peliculaNueva));
 
         } catch (RuntimeException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
-    @PutMapping(path="/{id}")
-    public ResponseEntity<?>actualizarPelicula(@PathVariable Long id,
-                                   @RequestBody PeliculaSerie pelicula){
-        try{
-        return ResponseEntity.ok(datos.updatePelicula(id,pelicula));
-    }
-        catch (RuntimeException ex) {
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<?> actualizarPelicula(@PathVariable Long id,
+                                                @RequestBody PeliculaSerie peliculaNueva) {
+        try {
+            return ResponseEntity.ok().body(pelicula.updatePelicula(id, peliculaNueva));
+        } catch (RuntimeException ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
 
-}}
+    }
+    @GetMapping(path = "/{generos}")
+    public ResponseEntity<List<PeliculaSerie>> filtrarPeliculaGenero(@PathVariable("generos") String nombreGenero) {
+        return ResponseEntity.ok().body(pelicula.filtrarPeliculaPorGenero(nombreGenero));
+    }
+}

@@ -21,10 +21,10 @@ public class PeliculaRepository implements com.besysoft.bootcampspringboot.repos
     public List<PeliculaSerie> crearPelicula() {
         this.peliculas = new ArrayList<>();
 
-        PeliculaSerie batmanPeli = new PeliculaSerie(1, "Batman", Fecha.formatear("03102000"), 4);
-        PeliculaSerie spidermanPeli = new PeliculaSerie(2, "Spiderman", Fecha.formatear("04012005"), 4);
-        PeliculaSerie minionsPeli = new PeliculaSerie(3, "Los Minions", Fecha.formatear("02012010"), 4);
-        PeliculaSerie noMiresPeli = new PeliculaSerie(4, "No mires para arriba", Fecha.formatear("02092022"), 5);
+        PeliculaSerie batmanPeli = new PeliculaSerie(1L, "Batman", Fecha.formatear("03102000"), 4);
+        PeliculaSerie spidermanPeli = new PeliculaSerie(2L, "Spiderman", Fecha.formatear("04012005"), 4);
+        PeliculaSerie minionsPeli = new PeliculaSerie(3L, "Los Minions", Fecha.formatear("02012010"), 4);
+        PeliculaSerie noMiresPeli = new PeliculaSerie(4L, "No mires para arriba", Fecha.formatear("02092022"), 5);
         peliculas.add(batmanPeli);
         peliculas.add(spidermanPeli);
         peliculas.add(minionsPeli);

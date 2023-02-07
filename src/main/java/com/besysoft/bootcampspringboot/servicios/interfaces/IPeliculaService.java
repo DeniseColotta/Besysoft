@@ -19,6 +19,6 @@ public interface IPeliculaService {
     PeliculaSerie agregarPelicula(PeliculaSerie nuevaPelicula);
 
     PeliculaSerie updatePelicula(long id, PeliculaSerie pelicula);
-    List<PeliculaSerie> filtrarPeliculaPorGenero(String nombreGenero);
+
 
 }

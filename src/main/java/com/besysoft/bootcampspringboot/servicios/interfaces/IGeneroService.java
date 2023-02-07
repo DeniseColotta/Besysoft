@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface IGeneroService {
     List<Genero> getAll();
 
-   // List<Genero> filtrarPeliculaPorGenero(String nombreGenero);
+    List<Genero> filtrarPeliculaPorGenero(String nombreGenero);
 
     Genero agregarGenero(Genero nuevoGenero);
 

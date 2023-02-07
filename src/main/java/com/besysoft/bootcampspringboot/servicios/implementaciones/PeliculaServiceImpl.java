@@ -29,9 +29,9 @@ public class PeliculaServiceImpl implements IPeliculaService {
     @Override
     public List<PeliculaSerie> filtrarPeliculaPorFecha(String desde, String hasta) {
 
-       Fecha.formatear(desde);
-       Fecha.formatear(hasta);
-        return repository.filtrarPeliculaPorFecha(desde, hasta);
+      LocalDate fecha1= Fecha.formatear(desde);
+       LocalDate fecha2= Fecha.formatear(hasta);
+        return repository.filtrarPeliculaPorFecha(fecha1, fecha2);
     }
 
     @Override
@@ -43,10 +43,7 @@ public class PeliculaServiceImpl implements IPeliculaService {
     public Optional<PeliculaSerie> filtrarPeliculaTitulo(String titulo) {
         return repository.filtrarPeliculaTitulo(titulo);
     }
-    @Override
-    public List<PeliculaSerie> filtrarPeliculaPorGenero(String nombreGenero) {
-        return repository.findGeneroByPelicula(nombreGenero);
-    }
+
     @Override
     public PeliculaSerie agregarPelicula(PeliculaSerie nuevaPelicula) {
         Optional<PeliculaSerie> oPelicula = repository.filtrarPeliculaTitulo(nuevaPelicula.getTitulo());

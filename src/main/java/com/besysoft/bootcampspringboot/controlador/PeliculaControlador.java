@@ -1,6 +1,6 @@
 package com.besysoft.bootcampspringboot.controlador;
 
-import com.besysoft.bootcampspringboot.Entidades.Genero;
+
 import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
 
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+
 import java.util.List;
 
 @RestController
@@ -43,13 +43,13 @@ public class PeliculaControlador {
 
     @GetMapping(path = "/fechas")
     ResponseEntity<?> peliculaPorRangoFecha(
-            @RequestParam String desde, @RequestParam String hasta) {
+            @RequestParam  String desde, @RequestParam String hasta) {
 
         try {
             return ResponseEntity.ok().body(pelicula.filtrarPeliculaPorFecha(desde, hasta));
 
         } catch (RuntimeException ex) {
-            return new ResponseEntity("Ingrese fecha con el formato ddMMyyyy", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("Ingrese fecha con el formato dd-MM-yyyy", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -73,8 +73,5 @@ public class PeliculaControlador {
         }
 
     }
-    @GetMapping(path = "/{generos}")
-    public ResponseEntity<List<PeliculaSerie>> filtrarPeliculaGenero(@PathVariable("generos") String nombreGenero) {
-        return ResponseEntity.ok().body(pelicula.filtrarPeliculaPorGenero(nombreGenero));
-    }
+
 }

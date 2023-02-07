@@ -24,10 +24,10 @@ public class PersonajeRepository implements com.besysoft.bootcampspringboot.repo
         this.peliculas = pelicula.crearPelicula();
         this.personajes = new ArrayList<>();
 
-        Personaje batman = new Personaje(1, "Batman", 40, 90.0, "Batman es la identidad secreta de Bruce Wayne, un empresario multimillonario, galán y filántropo.");
-        Personaje guazon = new Personaje(2, "El Guazón", 50, 100.0, "Es uno de los criminales más notables de Gotham City, y es el enemigo principal de Batman");
-        Personaje spiderman = new Personaje(3, "Spiderman", 50, 80.0, "Se trata de un superhéroe que emplea sus habilidades sobrehumanas, reminiscentes de una araña, para combatir a otros supervillanos que persiguen fines siniestros.");
-        Personaje gru = new Personaje(4, "Gru", 10, 20.0, "El pequeño Gru es el mayor fan del clan y sueña con ser el nuevo 'salvaje'. Cuando consigue presentarse ante ellos, solo recibe burlas por su edad y su aspecto");
+        Personaje batman = new Personaje(1L, "Batman", 40, 90.0, "Batman es la identidad secreta de Bruce Wayne, un empresario multimillonario, galán y filántropo.");
+        Personaje guazon = new Personaje(2L, "El Guazón", 50, 100.0, "Es uno de los criminales más notables de Gotham City, y es el enemigo principal de Batman");
+        Personaje spiderman = new Personaje(3L, "Spiderman", 50, 80.0, "Se trata de un superhéroe que emplea sus habilidades sobrehumanas, reminiscentes de una araña, para combatir a otros supervillanos que persiguen fines siniestros.");
+        Personaje gru = new Personaje(4L, "Gru", 10, 20.0, "El pequeño Gru es el mayor fan del clan y sueña con ser el nuevo 'salvaje'. Cuando consigue presentarse ante ellos, solo recibe burlas por su edad y su aspecto");
 
         batman.setPeliculaSerie(List.of(peliculas.get(0)));
         guazon.setPeliculaSerie(List.of(peliculas.get(0)));

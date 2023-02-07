@@ -1,8 +1,6 @@
 package com.besysoft.bootcampspringboot.Entidades;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,26 +20,23 @@ public class PeliculaSerie implements Serializable {
     private String titulo;
 
     @Column(name = "fechaDeCreacion")
-    //@JsonFormat(pattern = "dd-MM-yyyy")
+
     private LocalDate fechaDeCreacion;
 
     private int calificacion; //1 al 5
 
-   // @JsonIgnore
+
     @ManyToMany(mappedBy = "peliculaSerie",
             fetch = FetchType.LAZY)
     private List<Personaje> personaje;
 
-    @ManyToOne()
-    @JoinColumn(name = "genero_id")
-    private Genero genero;
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -78,16 +73,24 @@ public class PeliculaSerie implements Serializable {
         this.personaje = personaje;
     }
 
+   /* public Genero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }*/
 
     public PeliculaSerie() {
     }
 
-    public PeliculaSerie(long id, String titulo, LocalDate fechaDeCreacion, int calificacion) {
+    public PeliculaSerie(Long id, String titulo, LocalDate fechaDeCreacion, int calificacion) {
         this.id = id;
         this.titulo = titulo;
         this.fechaDeCreacion = fechaDeCreacion;
         this.calificacion = calificacion;
         this.personaje = new ArrayList<>();
+
 
     }
 }

@@ -44,9 +44,7 @@ public class PersonajeServiceImpl implements IPersonajeService {
 
     @Override
     public Personaje updatePersonaje(long id, Personaje personajeAct) {
-        Optional<Personaje> oPersonaje = personajeRepository.findById(id);/*.crearPersonaje().stream().
-                filter(pr -> pr.getId() == id)
-                .findAny();*/
+        Optional<Personaje> oPersonaje = personajeRepository.findById(id);
 
         if (!oPersonaje.isPresent()) {
             throw new RuntimeException("El Id ingresado no existe");

@@ -18,10 +18,10 @@ public class Datos {
         List<PeliculaSerie> peliculas = new ArrayList<>();
 
 
-        PeliculaSerie batmanPeli = new PeliculaSerie(1, "Batman", Fecha.formatear("03102000"), 4);
-        PeliculaSerie spidermanPeli = new PeliculaSerie(2, "Spiderman", Fecha.formatear("04012005"), 4);
-        PeliculaSerie minionsPeli = new PeliculaSerie(3, "Los Minions", Fecha.formatear("02012010"), 4);
-        PeliculaSerie noMiresPeli = new PeliculaSerie(4, "No mires para arriba", Fecha.formatear("02092022"), 5);
+        PeliculaSerie batmanPeli = new PeliculaSerie(1L, "Batman", Fecha.formatear("03102000"), 4);
+        PeliculaSerie spidermanPeli = new PeliculaSerie(2L, "Spiderman", Fecha.formatear("04012005"), 4);
+        PeliculaSerie minionsPeli = new PeliculaSerie(3L, "Los Minions", Fecha.formatear("02012010"), 4);
+        PeliculaSerie noMiresPeli = new PeliculaSerie(4L, "No mires para arriba", Fecha.formatear("02092022"), 5);
         peliculas.add(batmanPeli);
         peliculas.add(spidermanPeli);
         peliculas.add(minionsPeli);
@@ -33,10 +33,10 @@ public class Datos {
         List<PeliculaSerie>peliculas=crearPelicula();
             List<Personaje> personajes = new ArrayList<>();
 
-            Personaje batman = new Personaje(1, "Batman", 40, 90.0, "Batman es la identidad secreta de Bruce Wayne, un empresario multimillonario, galán y filántropo.");
-            Personaje guazon = new Personaje(2, "El Guazón", 50, 100.0, "Es uno de los criminales más notables de Gotham City, y es el enemigo principal de Batman");
-            Personaje spiderman = new Personaje(3, "Spiderman", 50, 80.0, "Se trata de un superhéroe que emplea sus habilidades sobrehumanas, reminiscentes de una araña, para combatir a otros supervillanos que persiguen fines siniestros.");
-            Personaje gru = new Personaje(4, "Gru", 10, 20.0, "El pequeño Gru es el mayor fan del clan y sueña con ser el nuevo 'salvaje'. Cuando consigue presentarse ante ellos, solo recibe burlas por su edad y su aspecto");
+            Personaje batman = new Personaje(1L, "Batman", 40, 90.0, "Batman es la identidad secreta de Bruce Wayne, un empresario multimillonario, galán y filántropo.");
+            Personaje guazon = new Personaje(2L, "El Guazón", 50, 100.0, "Es uno de los criminales más notables de Gotham City, y es el enemigo principal de Batman");
+            Personaje spiderman = new Personaje(3L, "Spiderman", 50, 80.0, "Se trata de un superhéroe que emplea sus habilidades sobrehumanas, reminiscentes de una araña, para combatir a otros supervillanos que persiguen fines siniestros.");
+            Personaje gru = new Personaje(4L, "Gru", 10, 20.0, "El pequeño Gru es el mayor fan del clan y sueña con ser el nuevo 'salvaje'. Cuando consigue presentarse ante ellos, solo recibe burlas por su edad y su aspecto");
 
             batman.setPeliculaSerie(List.of(peliculas.get(0)));
             guazon.setPeliculaSerie(List.of(peliculas.get(0)));

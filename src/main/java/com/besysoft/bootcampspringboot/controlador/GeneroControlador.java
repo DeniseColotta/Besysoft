@@ -23,7 +23,9 @@ public class GeneroControlador {
         return ResponseEntity.ok().body(generoServicie.getAll());
     }
 
-
+    @GetMapping(path = "/{generos}")
+    public ResponseEntity<List<Genero>> filtrarPeliculaGenero(@PathVariable("generos") String nombreGenero) {
+        return ResponseEntity.ok().body(generoServicie.filtrarPeliculaPorGenero(nombreGenero));}
 
     @PostMapping
     public ResponseEntity<?> crearGenero(@RequestBody Genero generoNuevo) {

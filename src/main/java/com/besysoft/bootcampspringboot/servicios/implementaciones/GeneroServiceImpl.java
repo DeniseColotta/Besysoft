@@ -17,16 +17,14 @@ public class GeneroServiceImpl implements IGeneroService {
     @Autowired
     private IGeneroRepository repository;
 
-   /* @Autowired
-    private IPeliculaRepository repositoryPeli;
-*/
+
 @Override
    public List<Genero> getAll(){
        return repository.findAll();}
-   /* @Override
+   @Override
     public List<Genero> filtrarPeliculaPorGenero(String nombreGenero) {
-        return repositoryPeli.findGeneroByPelicula(nombreGenero);
-    }*/
+        return repository.findGeneroByPelicula(nombreGenero);
+    }
 
    @Override
     public Genero agregarGenero(Genero nuevoGenero) {

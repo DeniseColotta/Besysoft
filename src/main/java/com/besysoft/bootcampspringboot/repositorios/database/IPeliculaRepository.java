@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface IPeliculaRepository extends JpaRepository<PeliculaSerie,Long> {
 
     @Query("select p from PeliculaSerie p where p.fechaDeCreacion BETWEEN ?1 AND ?2")
-    List<PeliculaSerie> filtrarPeliculaPorFecha(String desde, String hasta);
+    List<PeliculaSerie> filtrarPeliculaPorFecha(LocalDate fecha1,LocalDate fecha2);//(String desde, String hasta);
 
     @Query("select p from PeliculaSerie p where p.calificacion > :desde and p.calificacion < :hasta")
     List<PeliculaSerie> filtrarPeliculaPorCalificacion(int desde, int hasta);
@@ -20,8 +20,7 @@ public interface IPeliculaRepository extends JpaRepository<PeliculaSerie,Long> {
     @Query("select p from PeliculaSerie p where p.titulo = :titulo")
     Optional<PeliculaSerie> filtrarPeliculaTitulo(String titulo);
 
-    @Query("select p from PeliculaSerie p where p.genero like :nombreGenero")
-    List<PeliculaSerie> findGeneroByPelicula(String nombreGenero);
+
 
 
 }

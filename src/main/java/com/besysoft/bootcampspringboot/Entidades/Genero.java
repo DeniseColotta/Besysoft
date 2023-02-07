@@ -16,7 +16,9 @@ public class Genero implements Serializable {
     @Column(nullable = false, length = 50)
     private String nombre;
 
-    @OneToMany(mappedBy = "genero")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "genero_id")
+
     private List<PeliculaSerie> peliculaSerie;
 
 

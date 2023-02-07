@@ -33,7 +33,7 @@ public class Personaje implements Serializable {
     private List<PeliculaSerie> peliculaSerie;
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -86,7 +86,7 @@ public class Personaje implements Serializable {
     }
 
 
-    public Personaje(long id, String nombre, int edad, double peso, String historia) {
+    public Personaje(Long id, String nombre, int edad, double peso, String historia) {
         this.nombre = nombre;
         this.edad = edad;
         this.peso = peso;

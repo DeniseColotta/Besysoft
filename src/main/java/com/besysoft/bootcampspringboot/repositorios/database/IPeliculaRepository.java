@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface IPeliculaRepository extends JpaRepository<PeliculaSerie,Long> {
 
     @Query("select p from PeliculaSerie p where p.fechaDeCreacion BETWEEN ?1 AND ?2")
-    List<PeliculaSerie> filtrarPeliculaPorFecha(LocalDate fecha1,LocalDate fecha2);//(String desde, String hasta);
+    List<PeliculaSerie> filtrarPeliculaPorFecha(LocalDate fecha1,LocalDate fecha2);
 
     @Query("select p from PeliculaSerie p where p.calificacion > :desde and p.calificacion < :hasta")
     List<PeliculaSerie> filtrarPeliculaPorCalificacion(int desde, int hasta);

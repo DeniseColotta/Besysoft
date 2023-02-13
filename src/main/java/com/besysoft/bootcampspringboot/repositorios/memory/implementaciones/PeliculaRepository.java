@@ -1,6 +1,7 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
 import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
+import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IPeliculaRepository;
 import com.besysoft.bootcampspringboot.utilidades.Fecha;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Repository
 
-public class PeliculaRepository implements com.besysoft.bootcampspringboot.repositorios.memory.interfaces.PeliculaRepository {
+public class PeliculaRepository implements IPeliculaRepository {
 
     List<PeliculaSerie> peliculas;
 

@@ -1,10 +1,8 @@
 package com.besysoft.bootcampspringboot.servicios.implementaciones;
 
-import com.besysoft.bootcampspringboot.Entidades.Genero;
 import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
 
 import com.besysoft.bootcampspringboot.repositorios.database.IPeliculaRepository;
-import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.PeliculaRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
 import com.besysoft.bootcampspringboot.utilidades.Fecha;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +27,8 @@ public class PeliculaServiceImpl implements IPeliculaService {
     @Override
     public List<PeliculaSerie> filtrarPeliculaPorFecha(String desde, String hasta) {
 
-      LocalDate fecha1= Fecha.formatear(desde);
-       LocalDate fecha2= Fecha.formatear(hasta);
+        LocalDate fecha1 = Fecha.formatear(desde);
+        LocalDate fecha2 = Fecha.formatear(hasta);
         return repository.filtrarPeliculaPorFecha(fecha1, fecha2);
     }
 

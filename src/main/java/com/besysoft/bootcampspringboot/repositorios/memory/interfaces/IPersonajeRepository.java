@@ -4,7 +4,7 @@ import com.besysoft.bootcampspringboot.Entidades.Personaje;
 
 import java.util.List;
 
-public interface PersonajeRepository {
+public interface IPersonajeRepository {
 
     List<Personaje> crearPersonaje();
 

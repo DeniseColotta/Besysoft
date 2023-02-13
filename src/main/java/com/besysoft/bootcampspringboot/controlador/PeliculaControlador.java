@@ -34,16 +34,14 @@ public class PeliculaControlador {
 
     @GetMapping(path = ("/calificaciones"))
     ResponseEntity<?> peliculaPorRangoCalificacion(@RequestParam int desde, @RequestParam int hasta) {
-        try {
-            return ResponseEntity.ok().body(pelicula.filtrarPeliculaPorCalificacion(desde, hasta));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
-        }
+        return ResponseEntity.ok().body(pelicula.filtrarPeliculaPorCalificacion(desde, hasta));
+
     }
+
 
     @GetMapping(path = "/fechas")
     ResponseEntity<?> peliculaPorRangoFecha(
-            @RequestParam  String desde, @RequestParam String hasta) {
+            @RequestParam String desde, @RequestParam String hasta) {
 
         try {
             return ResponseEntity.ok().body(pelicula.filtrarPeliculaPorFecha(desde, hasta));
@@ -55,11 +53,13 @@ public class PeliculaControlador {
 
     @PostMapping
     public ResponseEntity<?> crearPelicula(@RequestBody PeliculaSerie peliculaNueva) {
+
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(pelicula.agregarPelicula(peliculaNueva));
 
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -68,10 +68,10 @@ public class PeliculaControlador {
                                                 @RequestBody PeliculaSerie peliculaNueva) {
         try {
             return ResponseEntity.ok().body(pelicula.updatePelicula(id, peliculaNueva));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }
-
 }

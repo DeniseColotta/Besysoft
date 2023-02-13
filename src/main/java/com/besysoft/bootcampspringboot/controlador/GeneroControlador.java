@@ -25,14 +25,20 @@ public class GeneroControlador {
 
     @GetMapping(path = "/{generos}")
     public ResponseEntity<List<Genero>> filtrarPeliculaGenero(@PathVariable("generos") String nombreGenero) {
-        return ResponseEntity.ok().body(generoServicie.filtrarPeliculaPorGenero(nombreGenero));}
+        try {
+            return ResponseEntity.ok().body(generoServicie.filtrarPeliculaPorGenero(nombreGenero));
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PostMapping
     public ResponseEntity<?> crearGenero(@RequestBody Genero generoNuevo) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(generoServicie.agregarGenero(generoNuevo));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -40,9 +46,11 @@ public class GeneroControlador {
     public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @RequestBody Genero genero) {
         try {
             return ResponseEntity.ok(generoServicie.updateGenero(id, genero));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }
+
 

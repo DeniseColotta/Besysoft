@@ -3,12 +3,13 @@ package com.besysoft.bootcampspringboot.servicios.interfaces;
 import com.besysoft.bootcampspringboot.Entidades.Personaje;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface IPersonajeService {
     List<Personaje> getAll();
 
-    List<Personaje> filtrarPersonajePorNombre(String nombre);
+    Optional<Personaje> filtrarPersonajePorNombre(String nombre);
 
     List<Personaje> filtrarPersonajesPorEdad(int edad);
 

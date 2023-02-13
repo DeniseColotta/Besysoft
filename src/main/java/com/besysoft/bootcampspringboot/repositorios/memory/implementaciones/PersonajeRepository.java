@@ -1,9 +1,7 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
-import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
 import com.besysoft.bootcampspringboot.Entidades.Personaje;
-import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.PeliculaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IPersonajeRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,17 +9,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class PersonajeRepository implements com.besysoft.bootcampspringboot.repositorios.memory.interfaces.PersonajeRepository {
+public class PersonajeRepository implements IPersonajeRepository {
 
     private List<Personaje> personajes;
-    private List<PeliculaSerie> peliculas;
-
-    @Autowired
-    private PeliculaRepository pelicula;
 
     @Override
     public List<Personaje> crearPersonaje() {
-        this.peliculas = pelicula.crearPelicula();
         this.personajes = new ArrayList<>();
 
         Personaje batman = new Personaje(1L, "Batman", 40, 90.0, "Batman es la identidad secreta de Bruce Wayne, un empresario multimillonario, galán y filántropo.");
@@ -29,10 +22,6 @@ public class PersonajeRepository implements com.besysoft.bootcampspringboot.repo
         Personaje spiderman = new Personaje(3L, "Spiderman", 50, 80.0, "Se trata de un superhéroe que emplea sus habilidades sobrehumanas, reminiscentes de una araña, para combatir a otros supervillanos que persiguen fines siniestros.");
         Personaje gru = new Personaje(4L, "Gru", 10, 20.0, "El pequeño Gru es el mayor fan del clan y sueña con ser el nuevo 'salvaje'. Cuando consigue presentarse ante ellos, solo recibe burlas por su edad y su aspecto");
 
-        batman.setPeliculaSerie(List.of(peliculas.get(0)));
-        guazon.setPeliculaSerie(List.of(peliculas.get(0)));
-        spiderman.setPeliculaSerie(List.of(peliculas.get(1)));
-        gru.setPeliculaSerie(List.of(peliculas.get(2)));
         personajes.add(batman);
         personajes.add(guazon);
         personajes.add(spiderman);

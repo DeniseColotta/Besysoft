@@ -3,9 +3,10 @@ package com.besysoft.bootcampspringboot.servicios.implementaciones;
 import com.besysoft.bootcampspringboot.Entidades.Genero;
 
 import com.besysoft.bootcampspringboot.repositorios.database.IGeneroRepository;
-import com.besysoft.bootcampspringboot.repositorios.database.IPeliculaRepository;
+
 import com.besysoft.bootcampspringboot.servicios.interfaces.IGeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,15 +19,25 @@ public class GeneroServiceImpl implements IGeneroService {
     private IGeneroRepository repository;
 
 
-@Override
-   public List<Genero> getAll(){
-       return repository.findAll();}
-   @Override
-    public List<Genero> filtrarPeliculaPorGenero(String nombreGenero) {
-        return repository.findGeneroByPelicula(nombreGenero);
+    @Override
+    public List<Genero> getAll() {
+        return repository.findAll();
     }
 
-   @Override
+    @Override
+    public List<Genero> filtrarPeliculaPorGenero(String nombreGenero) {
+
+        Optional<Genero> oGenero = repository.findByNombre(nombreGenero);
+
+        if (!oGenero.isPresent()) {
+            throw new RuntimeException("el genero ingresado no existe");
+        }
+
+        return repository.findGeneroByPelicula(nombreGenero);
+
+    }
+
+    @Override
     public Genero agregarGenero(Genero nuevoGenero) {
         Optional<Genero> oGenero = repository.findByNombre(nuevoGenero.getNombre());
 
@@ -53,9 +64,14 @@ public class GeneroServiceImpl implements IGeneroService {
     }
 
 
-   @Override
+    @Override
     public Optional<Genero> findByNombre(String nombre) {
         return repository.findByNombre(nombre);
+    }
+
+    @Override
+    public boolean existePorNombre(String nombre) {
+        return this.repository.existsByNombre(nombre);
     }
 }
 

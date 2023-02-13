@@ -26,38 +26,31 @@ public class PersonajeControlador {
 
     @GetMapping(path = "/nombres/{nombres}")
     ResponseEntity<?> filtrarPersonajePorNombre(@PathVariable("nombres") String nombrePersonaje) {
-        try {
-            return ResponseEntity.ok().body(servicePersonaje.filtrarPersonajePorNombre(nombrePersonaje));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
-        }
+        return ResponseEntity.ok().body(servicePersonaje.filtrarPersonajePorNombre(nombrePersonaje));
     }
+
 
     @GetMapping(path = "/edades/{edades}")
     ResponseEntity<?> filtrarPersonajePorEdad(@PathVariable("edades") int edad) {
-        try {
-            return ResponseEntity.ok().body(servicePersonaje.filtrarPersonajesPorEdad(edad));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
-        }
+
+        return ResponseEntity.ok().body(servicePersonaje.filtrarPersonajesPorEdad(edad));
     }
+
 
     @GetMapping(path = ("/edades"))
     ResponseEntity<?> filtrarPersonajePorRangoEdad(@RequestParam int desde, @RequestParam int hasta) {
-        try {
-            return ResponseEntity.ok().body(servicePersonaje.filtrarPersonajesPorRangoEdad(desde, hasta));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
-        }
 
+        return ResponseEntity.ok().body(servicePersonaje.filtrarPersonajesPorRangoEdad(desde, hasta));
     }
+
 
     @PostMapping()
     public ResponseEntity<?> altaPersonaje(@RequestBody Personaje personajeNuevo) {
+
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(servicePersonaje.agregarPersonaje(personajeNuevo));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
 
@@ -66,13 +59,15 @@ public class PersonajeControlador {
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> actualizarPersonaje(@PathVariable Long id,
                                                  @RequestBody Personaje personaje) {
+
         try {
             return ResponseEntity.ok(servicePersonaje.updatePersonaje(id, personaje));
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+
         }
-
     }
-}
 
+}
 

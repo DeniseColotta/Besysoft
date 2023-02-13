@@ -6,7 +6,7 @@ import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
 import java.util.List;
 import java.util.Optional;
 
-public interface PeliculaRepository {
+public interface IPeliculaRepository {
     List<PeliculaSerie> crearPelicula();
 
     List<PeliculaSerie> filtrarPeliculaPorFecha(String desde, String hasta);

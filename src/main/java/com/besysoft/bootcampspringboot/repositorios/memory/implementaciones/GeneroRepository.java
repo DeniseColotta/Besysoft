@@ -1,7 +1,7 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
 import com.besysoft.bootcampspringboot.Entidades.Genero;
-import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
+import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IGeneroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,19 +11,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class GeneroRepository implements com.besysoft.bootcampspringboot.repositorios.memory.interfaces.GeneroRepository {
+public class GeneroRepository implements IGeneroRepository {
 
     List<Genero> generos;
 
-    List<PeliculaSerie> peliculas;
-
-    @Autowired
-    public PeliculaRepository peliculaRepository;
 
     @Override
     public List<Genero> obtenerTodos() {
 
-        List<PeliculaSerie> peliculas = peliculaRepository.crearPelicula();
+
         this.generos = new ArrayList<>();
         Genero comedia = new Genero(1L, "comedia");
         Genero accion = new Genero(2L, "accionAventura");
@@ -31,10 +27,6 @@ public class GeneroRepository implements com.besysoft.bootcampspringboot.reposit
         Genero drama = new Genero(4L, "drama");
         Genero terror = new Genero(5L, "terror");
 
-
-        comedia.setPeliculaSerie(List.of(peliculas.get(3)));
-        accion.setPeliculaSerie(List.of(peliculas.get(1), peliculas.get(0)));
-        infantil.setPeliculaSerie(List.of(peliculas.get(2)));
         generos.add(comedia);
         generos.add(accion);
         generos.add(infantil);

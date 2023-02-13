@@ -1,5 +1,5 @@
 package com.besysoft.bootcampspringboot.Entidades;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import javax.persistence.*;
@@ -25,11 +25,10 @@ public class PeliculaSerie implements Serializable {
 
     private int calificacion; //1 al 5
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "peliculaSerie",
             fetch = FetchType.LAZY)
     private List<Personaje> personaje;
-
 
 
     public Long getId() {
@@ -73,13 +72,6 @@ public class PeliculaSerie implements Serializable {
         this.personaje = personaje;
     }
 
-   /* public Genero getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Genero genero) {
-        this.genero = genero;
-    }*/
 
     public PeliculaSerie() {
     }

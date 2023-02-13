@@ -2,7 +2,6 @@ package com.besysoft.bootcampspringboot.servicios.implementaciones;
 
 import com.besysoft.bootcampspringboot.Entidades.Personaje;
 import com.besysoft.bootcampspringboot.repositorios.database.IPersonajeRepository;
-import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.PersonajeRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class PersonajeServiceImpl implements IPersonajeService {
     }
 
     @Override
-    public List<Personaje> filtrarPersonajePorNombre(String nombre) {
+    public Optional<Personaje> filtrarPersonajePorNombre(String nombre) {
         return personajeRepository.filtrarPersonajePorNombre(nombre);
     }
 
@@ -39,6 +38,13 @@ public class PersonajeServiceImpl implements IPersonajeService {
 
     @Override
     public Personaje agregarPersonaje(Personaje nuevoPersonaje) {
+
+        Optional<Personaje> oPersonaje = personajeRepository.filtrarPersonajePorNombre(nuevoPersonaje.getNombre());
+
+        if (oPersonaje.isPresent()) {
+            throw new RuntimeException("El personaje ingresado ya existe");
+        }
+
         return personajeRepository.save(nuevoPersonaje);
     }
 
@@ -50,12 +56,10 @@ public class PersonajeServiceImpl implements IPersonajeService {
             throw new RuntimeException("El Id ingresado no existe");
 
         }
-                    personajeAct.setNombre(personajeAct.getNombre());
-                    personajeAct.setEdad(personajeAct.getEdad());
-                    personajeAct.setPeso(personajeAct.getPeso());
-                    personajeAct.setHistoria(personajeAct.getHistoria());
-
-
+        personajeAct.setNombre(personajeAct.getNombre());
+        personajeAct.setEdad(personajeAct.getEdad());
+        personajeAct.setPeso(personajeAct.getPeso());
+        personajeAct.setHistoria(personajeAct.getHistoria());
 
 
         return personajeRepository.save(personajeAct);

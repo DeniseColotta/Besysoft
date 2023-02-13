@@ -5,7 +5,7 @@ import com.besysoft.bootcampspringboot.Entidades.Genero;
 import java.util.List;
 import java.util.Optional;
 
-public interface GeneroRepository {
+public interface IGeneroRepository {
     List<Genero> obtenerTodos();
 
     List<Genero> filtrarPeliculaPorGenero(String nombreGenero);

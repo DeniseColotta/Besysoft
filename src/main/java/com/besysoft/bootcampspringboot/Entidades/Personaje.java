@@ -22,14 +22,14 @@ public class Personaje implements Serializable {
 
     private double peso;
 
-    @Column(nullable = false, length = 200)
+    @Column(length = 200)
     private String historia;
 
     @ManyToMany
     @JoinTable(
-    name = "peliculasSeries_personajes",
-    joinColumns = @JoinColumn(name = "personaje_id"),
-    inverseJoinColumns = @JoinColumn(name = "peliculaSerie_id"))
+            name = "peliculasSeries_personajes",
+            joinColumns = @JoinColumn(name = "personaje_id"),
+            inverseJoinColumns = @JoinColumn(name = "peliculaSerie_id"))
     private List<PeliculaSerie> peliculaSerie;
 
 

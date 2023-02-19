@@ -1,6 +1,6 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
-import com.besysoft.bootcampspringboot.Entidades.Personaje;
+import com.besysoft.bootcampspringboot.modelos.Personaje;
 import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IPersonajeRepository;
 import org.springframework.stereotype.Repository;
 

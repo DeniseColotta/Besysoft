@@ -1,6 +1,6 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.interfaces;
 
-import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
+import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
 
 
 import java.util.List;

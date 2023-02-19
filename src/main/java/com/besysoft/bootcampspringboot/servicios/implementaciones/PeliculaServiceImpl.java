@@ -1,16 +1,21 @@
 package com.besysoft.bootcampspringboot.servicios.implementaciones;
 
-import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
+import com.besysoft.bootcampspringboot.dto.mapper.IPeliculaSerieMapper;
+import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
+import com.besysoft.bootcampspringboot.dto.response.PeliculaSerieResponseDto;
+import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
 
 import com.besysoft.bootcampspringboot.repositorios.database.IPeliculaRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
 import com.besysoft.bootcampspringboot.utilidades.Fecha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PeliculaServiceImpl implements IPeliculaService {
@@ -18,43 +23,77 @@ public class PeliculaServiceImpl implements IPeliculaService {
     @Autowired
     private IPeliculaRepository repository;
 
+    @Autowired
+    private IPeliculaSerieMapper peliculaMapper;
 
-    public List<PeliculaSerie> getAll() {
+    @Transactional(readOnly = true)
+    public List<PeliculaSerieResponseDto> getAll() {
+        List<PeliculaSerie> peliculas = repository.findAll();
+        List<PeliculaSerieResponseDto> peliculaDto = peliculas.stream()
+                .map(peliculaMapper::mapToDto)
+                .collect(Collectors.toList());
 
-        return repository.findAll();
+
+
+        return peliculaDto;
     }
 
+    @Transactional(readOnly = true)
     @Override
-    public List<PeliculaSerie> filtrarPeliculaPorFecha(String desde, String hasta) {
+    public List<PeliculaSerieResponseDto> filtrarPeliculaPorFecha(String desde, String hasta) {
 
         LocalDate fecha1 = Fecha.formatear(desde);
         LocalDate fecha2 = Fecha.formatear(hasta);
-        return repository.filtrarPeliculaPorFecha(fecha1, fecha2);
+        List<PeliculaSerie> peliculas = repository.findPeliculaByFechaBetween(fecha1, fecha2);
+
+        List<PeliculaSerieResponseDto> peliculaDto = peliculas.stream()
+                .map(peliculaMapper::mapToDto)
+                .collect(Collectors.toList());
+
+        return peliculaDto;
+
     }
 
+    @Transactional(readOnly = true)
     @Override
-    public List<PeliculaSerie> filtrarPeliculaPorCalificacion(int desde, int hasta) {
-        return repository.filtrarPeliculaPorCalificacion(desde, hasta);
+    public List<PeliculaSerieResponseDto> filtrarPeliculaPorCalificacion(int desde, int hasta) {
+
+        List<PeliculaSerie> peliculas = repository.findPeliculaByCalificacionBetween(desde,hasta);
+
+        List<PeliculaSerieResponseDto> peliculaDto = peliculas.stream()
+                .map(peliculaMapper::mapToDto)
+                .collect(Collectors.toList());
+
+        return peliculaDto;
+
     }
 
+    @Transactional(readOnly = true)
     @Override
-    public Optional<PeliculaSerie> filtrarPeliculaTitulo(String titulo) {
-        return repository.filtrarPeliculaTitulo(titulo);
+    public PeliculaSerieResponseDto filtrarPeliculaTitulo(String titulo) {
+      Optional<PeliculaSerie>pelicula= repository.findPeliculaByTitulo(titulo);
+      PeliculaSerieResponseDto peliculas= peliculaMapper.mapToDto(pelicula.get());
+      return peliculas;
+
+
     }
 
+    @Transactional(readOnly = false)
     @Override
-    public PeliculaSerie agregarPelicula(PeliculaSerie nuevaPelicula) {
-        Optional<PeliculaSerie> oPelicula = repository.filtrarPeliculaTitulo(nuevaPelicula.getTitulo());
+    public PeliculaSerieResponseDto agregarPelicula(PeliculaSerieRequestDto nuevaPelicula) {
+        Optional<PeliculaSerie> oPelicula = repository.findPeliculaByTitulo(nuevaPelicula.getTitulo());
 
         if (oPelicula.isPresent()) {
             throw new RuntimeException("La película ingresada ya existe");
         }
+        PeliculaSerie pelicula= repository.save(peliculaMapper.mapToEntity(nuevaPelicula));
+        return peliculaMapper.mapToDto(pelicula);
 
-        return repository.save(nuevaPelicula);
     }
 
+    @Transactional(readOnly = false)
     @Override
-    public PeliculaSerie updatePelicula(long id, PeliculaSerie pelicula) {
+    public PeliculaSerieResponseDto updatePelicula(long id, PeliculaSerieRequestDto pelicula) {
         Optional<PeliculaSerie> oPelicula = repository.findById(id);
 
         if (!oPelicula.isPresent()) {
@@ -63,6 +102,9 @@ public class PeliculaServiceImpl implements IPeliculaService {
         pelicula.setTitulo(pelicula.getTitulo());
         pelicula.setCalificacion(pelicula.getCalificacion());
         pelicula.setFechaDeCreacion(pelicula.getFechaDeCreacion());
-        return repository.save(pelicula);
+
+        PeliculaSerie peliculaSerie=repository.save(peliculaMapper.mapToEntity(pelicula));
+        return peliculaMapper.mapToDto(peliculaSerie);
+
     }
 }

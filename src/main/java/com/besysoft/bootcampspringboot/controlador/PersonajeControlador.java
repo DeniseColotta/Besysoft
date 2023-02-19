@@ -1,15 +1,22 @@
 package com.besysoft.bootcampspringboot.controlador;
 
-import com.besysoft.bootcampspringboot.Entidades.Personaje;
+import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
+
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPersonajeService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
+
+@Slf4j
 @RestController
 @RequestMapping(path = "/personajes")
 
@@ -20,7 +27,7 @@ public class PersonajeControlador {
 
     @GetMapping
     public @ResponseBody
-    ResponseEntity<List<Personaje>> filtrarPersonaje() {
+    ResponseEntity<?> filtrarPersonaje() {
         return ResponseEntity.ok().body(servicePersonaje.getAll());
     }
 
@@ -45,8 +52,20 @@ public class PersonajeControlador {
 
 
     @PostMapping()
-    public ResponseEntity<?> altaPersonaje(@RequestBody Personaje personajeNuevo) {
+    public ResponseEntity<?> altaPersonaje(@Valid @RequestBody PersonajeRequestDto personajeNuevo, BindingResult result) {
+        if(result.hasErrors()) {
 
+            Map<String, String> validaciones = new HashMap<>();
+            log.info("Ocurrio una validacion, en el metodo altaPersonaje().");
+
+            result.getFieldErrors().forEach(error -> {
+                log.info("Atributo: " + error.getField() + " - Validacion: " + error.getDefaultMessage());
+                validaciones.put(error.getField(), error.getDefaultMessage());
+            });
+
+
+            return ResponseEntity.badRequest().body(validaciones);
+        }
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(servicePersonaje.agregarPersonaje(personajeNuevo));
         } catch (Exception e) {
@@ -58,8 +77,19 @@ public class PersonajeControlador {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> actualizarPersonaje(@PathVariable Long id,
-                                                 @RequestBody Personaje personaje) {
+                                                 @Valid @RequestBody PersonajeRequestDto personaje,BindingResult result) {
+        if(result.hasErrors()) {
 
+            Map<String, String> validaciones = new HashMap<>();
+            log.info("Ocurrio una validacion, en el metodo actualizarPersonaje().");
+
+            result.getFieldErrors().forEach(error -> {
+                log.info("Atributo: " + error.getField() + " - Validacion: " + error.getDefaultMessage());
+                validaciones.put(error.getField(), error.getDefaultMessage());
+            });
+
+            return ResponseEntity.badRequest().body(validaciones);
+        }
         try {
             return ResponseEntity.ok(servicePersonaje.updatePersonaje(id, personaje));
 

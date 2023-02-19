@@ -1,6 +1,6 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
-import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
+import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
 import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IPeliculaRepository;
 import com.besysoft.bootcampspringboot.utilidades.Fecha;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,11 @@
-package com.besysoft.bootcampspringboot.Entidades;
+package com.besysoft.bootcampspringboot.modelos;
+
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +23,6 @@ public class Genero implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "genero_id")
-
     private List<PeliculaSerie> peliculaSerie;
 
 

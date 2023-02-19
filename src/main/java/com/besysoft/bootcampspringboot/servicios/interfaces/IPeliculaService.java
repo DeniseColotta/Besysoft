@@ -1,24 +1,26 @@
 package com.besysoft.bootcampspringboot.servicios.interfaces;
 
 
-import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
+import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
+import com.besysoft.bootcampspringboot.dto.response.PeliculaSerieResponseDto;
+import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IPeliculaService {
 
-    List<PeliculaSerie> getAll();
+    List<PeliculaSerieResponseDto> getAll();
 
-    List<PeliculaSerie> filtrarPeliculaPorFecha(String desde, String hasta);
+    List<PeliculaSerieResponseDto> filtrarPeliculaPorFecha(String desde, String hasta);
 
-    List<PeliculaSerie> filtrarPeliculaPorCalificacion(int desde, int hasta);
+    List<PeliculaSerieResponseDto> filtrarPeliculaPorCalificacion(int desde, int hasta);
 
-    Optional<PeliculaSerie> filtrarPeliculaTitulo(String titulo);
+    PeliculaSerieResponseDto filtrarPeliculaTitulo(String titulo);
 
-    PeliculaSerie agregarPelicula(PeliculaSerie nuevaPelicula);
+    PeliculaSerieResponseDto agregarPelicula(PeliculaSerieRequestDto nuevaPelicula);
 
-    PeliculaSerie updatePelicula(long id, PeliculaSerie pelicula);
+    PeliculaSerieResponseDto updatePelicula(long id, PeliculaSerieRequestDto pelicula);
 
 
 }

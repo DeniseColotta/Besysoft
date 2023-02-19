@@ -1,8 +1,7 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
-import com.besysoft.bootcampspringboot.Entidades.Genero;
+import com.besysoft.bootcampspringboot.modelos.Genero;
 import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IGeneroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

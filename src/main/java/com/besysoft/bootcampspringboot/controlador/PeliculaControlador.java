@@ -1,17 +1,23 @@
 package com.besysoft.bootcampspringboot.controlador;
 
 
-import com.besysoft.bootcampspringboot.Entidades.PeliculaSerie;
+import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
+
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
-import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(path = "/películas")
 
@@ -21,7 +27,7 @@ public class PeliculaControlador {
     private IPeliculaService pelicula;
 
     @GetMapping
-    public ResponseEntity<List<PeliculaSerie>> listaPeliculaSerie() {
+    public ResponseEntity<?> listaPeliculaSerie() {
 
         return ResponseEntity.ok().body(pelicula.getAll());
     }
@@ -52,8 +58,21 @@ public class PeliculaControlador {
     }
 
     @PostMapping
-    public ResponseEntity<?> crearPelicula(@RequestBody PeliculaSerie peliculaNueva) {
+    public ResponseEntity<?> crearPelicula(@Valid @RequestBody PeliculaSerieRequestDto peliculaNueva, BindingResult result) {
 
+        if(result.hasErrors()){
+
+            Map<String, String> validaciones = new HashMap<>();
+            log.info("Ocurrio una validacion, en el metodo crearPelicula().");
+
+            result.getFieldErrors().forEach(error -> {
+                log.info("Atributo: " + error.getField() + " - Validacion: " + error.getDefaultMessage());
+                validaciones.put(error.getField(), error.getDefaultMessage());
+            });
+
+            return ResponseEntity.badRequest().body(validaciones);
+
+        }
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(pelicula.agregarPelicula(peliculaNueva));
 
@@ -65,7 +84,21 @@ public class PeliculaControlador {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> actualizarPelicula(@PathVariable Long id,
-                                                @RequestBody PeliculaSerie peliculaNueva) {
+                                                @Valid @RequestBody PeliculaSerieRequestDto peliculaNueva,BindingResult result) {
+
+        if(result.hasErrors()){
+
+            Map<String, String> validaciones = new HashMap<>();
+            log.info("Ocurrio una validacion, en el metodo actualizarPelicula().");
+
+            result.getFieldErrors().forEach(error -> {
+                log.info("Atributo: " + error.getField() + " - Validacion: " + error.getDefaultMessage());
+                validaciones.put(error.getField(), error.getDefaultMessage());
+            });
+
+            return ResponseEntity.badRequest().body(validaciones);
+
+        }
         try {
             return ResponseEntity.ok().body(pelicula.updatePelicula(id, peliculaNueva));
 

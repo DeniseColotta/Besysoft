@@ -1,4 +1,4 @@
-package com.besysoft.bootcampspringboot.Entidades;
+package com.besysoft.bootcampspringboot.modelos;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "peliculasSeries")
+@Table(name = "peliculas_series")
 public class PeliculaSerie implements Serializable {
 
     @Id
@@ -19,16 +19,19 @@ public class PeliculaSerie implements Serializable {
     @Column(nullable = false, length = 50)
     private String titulo;
 
-    @Column(name = "fechaDeCreacion")
-
+    @Column(name = "fecha_de_creacion")
     private LocalDate fechaDeCreacion;
 
-    private int calificacion; //1 al 5
+    private Integer calificacion;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "peliculaSerie",
-            fetch = FetchType.LAZY)
-    private List<Personaje> personaje;
+    //@JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "personajes_peliculas_series",
+            joinColumns = @JoinColumn(name = "pelicula_serie_id"),
+            inverseJoinColumns = @JoinColumn(name = "personaje_id")
+    )
+    private List<Personaje> personajes;
 
 
     public Long getId() {
@@ -55,33 +58,32 @@ public class PeliculaSerie implements Serializable {
         this.fechaDeCreacion = fechaDeCreacion;
     }
 
-    public int getCalificacion() {
+    public Integer getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(int calificacion) {
+    public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
 
-
     public List<Personaje> getPersonaje() {
-        return personaje;
+        return personajes;
     }
 
     public void setPersonaje(List<Personaje> personaje) {
-        this.personaje = personaje;
+        this.personajes = personaje;
     }
 
 
     public PeliculaSerie() {
     }
 
-    public PeliculaSerie(Long id, String titulo, LocalDate fechaDeCreacion, int calificacion) {
+    public PeliculaSerie(Long id, String titulo, LocalDate fechaDeCreacion, Integer calificacion) {
         this.id = id;
         this.titulo = titulo;
         this.fechaDeCreacion = fechaDeCreacion;
         this.calificacion = calificacion;
-        this.personaje = new ArrayList<>();
+        this.personajes = new ArrayList<>();
 
 
     }

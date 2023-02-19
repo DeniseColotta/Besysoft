@@ -1,22 +1,24 @@
 package com.besysoft.bootcampspringboot.servicios.interfaces;
 
-import com.besysoft.bootcampspringboot.Entidades.Personaje;
+import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
+import com.besysoft.bootcampspringboot.dto.response.PersonajeResponseDto;
+import com.besysoft.bootcampspringboot.modelos.Personaje;
 
 import java.util.List;
 import java.util.Optional;
 
 
 public interface IPersonajeService {
-    List<Personaje> getAll();
+    List<PersonajeResponseDto> getAll();
 
-    Optional<Personaje> filtrarPersonajePorNombre(String nombre);
+    PersonajeResponseDto filtrarPersonajePorNombre(String nombre);
 
-    List<Personaje> filtrarPersonajesPorEdad(int edad);
+    List<PersonajeResponseDto> filtrarPersonajesPorEdad(int edad);
 
-    List<Personaje> filtrarPersonajesPorRangoEdad(int desde, int hasta);
+    List<PersonajeResponseDto> filtrarPersonajesPorRangoEdad(int desde, int hasta);
 
-    Personaje agregarPersonaje(Personaje nuevoPersonaje);
+    PersonajeResponseDto agregarPersonaje(PersonajeRequestDto nuevoPersonaje);
 
-    Personaje updatePersonaje(long id, Personaje personaje);
+    PersonajeResponseDto updatePersonaje(long id, PersonajeRequestDto personaje);
 
 }

@@ -1,5 +1,7 @@
-package com.besysoft.bootcampspringboot.Entidades;
+package com.besysoft.bootcampspringboot.modelos;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,19 +20,16 @@ public class Personaje implements Serializable {
     @Column(nullable = false, length = 50)
     private String nombre;
 
-    private int edad;
+    private Integer edad;
 
-    private double peso;
+    private Double peso;
 
     @Column(length = 200)
     private String historia;
 
-    @ManyToMany
-    @JoinTable(
-            name = "peliculasSeries_personajes",
-            joinColumns = @JoinColumn(name = "personaje_id"),
-            inverseJoinColumns = @JoinColumn(name = "peliculaSerie_id"))
-    private List<PeliculaSerie> peliculaSerie;
+   // @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "personajes")
+    private List<PeliculaSerie> peliculasSeries;
 
 
     public Long getId() {
@@ -49,19 +48,19 @@ public class Personaje implements Serializable {
         this.nombre = nombre;
     }
 
-    public int getEdad() {
+    public Integer getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(Integer edad) {
         this.edad = edad;
     }
 
-    public double getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 
@@ -73,12 +72,12 @@ public class Personaje implements Serializable {
         this.historia = historia;
     }
 
-    public List<PeliculaSerie> getPeliculaSerie() {
-        return peliculaSerie;
+    public List<PeliculaSerie> getPeliculaSeries() {
+        return peliculasSeries;
     }
 
-    public void setPeliculaSerie(List<PeliculaSerie> peliculaSerie) {
-        this.peliculaSerie = peliculaSerie;
+    public void setPeliculaSeries(List<PeliculaSerie> peliculaSeries) {
+        this.peliculasSeries = peliculaSeries;
     }
 
 
@@ -86,13 +85,13 @@ public class Personaje implements Serializable {
     }
 
 
-    public Personaje(Long id, String nombre, int edad, double peso, String historia) {
+    public Personaje(Long id, String nombre, Integer edad, Double peso, String historia) {
         this.nombre = nombre;
         this.edad = edad;
         this.peso = peso;
         this.historia = historia;
         this.id = id;
-        this.peliculaSerie = new ArrayList<>();
+        this.peliculasSeries = new ArrayList<>();
 
     }
 }

@@ -1,6 +1,6 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.interfaces;
 
-import com.besysoft.bootcampspringboot.Entidades.Genero;
+import com.besysoft.bootcampspringboot.modelos.Genero;
 
 import java.util.List;
 import java.util.Optional;

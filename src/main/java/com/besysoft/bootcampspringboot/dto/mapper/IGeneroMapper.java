@@ -20,5 +20,5 @@ public interface IGeneroMapper {
     @Mapping(source="peliculaSerie",target = "pelicula")
     GeneroResponseDto mapToDto(Genero genero);
 
- //   List<GeneroResponseDto> mapListToDto(List<Genero> generos);
+
 }

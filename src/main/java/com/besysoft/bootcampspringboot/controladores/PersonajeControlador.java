@@ -1,4 +1,4 @@
-package com.besysoft.bootcampspringboot.controlador;
+package com.besysoft.bootcampspringboot.controladores;
 
 import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
 

@@ -14,19 +14,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface IPeliculaSerieMapper {
 
-   // PeliculaSerie mapToEntity(PeliculaSerieRequestDto dto);
-
-
-   // PeliculaSerieResponseDto mapToDto(PeliculaSerie peliculaSerie);
-
    PeliculaSerie mapToEntity(PeliculaSerieRequestDto dto);
 
+   PeliculaSerieResponseDto mapToDto(PeliculaSerie entity);
 
-   // PeliculaSerie mapRespToEntity(PeliculaSerieResponseDto dtoResp);
-
-    PeliculaSerieResponseDto mapToDto(PeliculaSerie entity);
-   // List<PeliculaSerieResponseDto> mapListToDto(List<PeliculaSerie> peliculas);
-   // List<PeliculaSerie> mapListToEntity(List<PeliculaSerieResponseDto> pelisDto);
 
 }
 

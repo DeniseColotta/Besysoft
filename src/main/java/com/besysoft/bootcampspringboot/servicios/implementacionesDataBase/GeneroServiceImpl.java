@@ -1,15 +1,18 @@
-package com.besysoft.bootcampspringboot.servicios.implementaciones;
+package com.besysoft.bootcampspringboot.servicios.implementacionesDataBase;
 
 import com.besysoft.bootcampspringboot.dto.mapper.IGeneroMapper;
 import com.besysoft.bootcampspringboot.dto.request.GeneroRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.GeneroResponseDto;
-import com.besysoft.bootcampspringboot.modelos.Genero;
+import com.besysoft.bootcampspringboot.dominios.Genero;
 
 import com.besysoft.bootcampspringboot.repositorios.database.IGeneroRepository;
 
 import com.besysoft.bootcampspringboot.servicios.interfaces.IGeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@ConditionalOnProperty(prefix = "app", name = "type-data", havingValue = "database")
 public class GeneroServiceImpl implements IGeneroService {
 
     @Autowired
@@ -64,7 +68,7 @@ public class GeneroServiceImpl implements IGeneroService {
         }
 
 
-      Genero genero= repository.save(generoMapper.mapToEntity(nuevoGenero));
+        Genero genero = repository.save(generoMapper.mapToEntity(nuevoGenero));
         return generoMapper.mapToDto(genero);
 
     }
@@ -79,11 +83,11 @@ public class GeneroServiceImpl implements IGeneroService {
 
         }
         generoAct.setNombre(generoAct.getNombre());
-        Genero genero=repository.save(generoMapper.mapToEntity(generoAct));
+        Genero genero = repository.save(generoMapper.mapToEntity(generoAct));
         return generoMapper.mapToDto(genero);
     }
 
-    @Transactional(readOnly = true)
+   /* @Transactional(readOnly = true)
     @Override
     public Optional<Genero> findByNombre(String nombre) {
         return repository.findByNombre(nombre);
@@ -95,4 +99,5 @@ public class GeneroServiceImpl implements IGeneroService {
         return this.repository.existsByNombre(nombre);
     }
 }
-
+*/
+}

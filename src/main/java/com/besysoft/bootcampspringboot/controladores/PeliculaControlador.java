@@ -7,6 +7,7 @@ import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -78,6 +79,7 @@ public class PeliculaControlador {
 
 
         } catch (Exception e) {
+            log.info("Ocurrio una validacion personalizada, en el metodo crearPelicula: " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
@@ -103,6 +105,7 @@ public class PeliculaControlador {
             return ResponseEntity.ok().body(pelicula.updatePelicula(id, peliculaNueva));
 
         } catch (Exception e) {
+            log.info("Ocurrio una validacion personalizada, en el metodo actualizarPelicula: " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 

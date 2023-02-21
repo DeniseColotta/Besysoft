@@ -3,10 +3,8 @@ package com.besysoft.bootcampspringboot.servicios.interfaces;
 
 import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.PeliculaSerieResponseDto;
-import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IPeliculaService {
 

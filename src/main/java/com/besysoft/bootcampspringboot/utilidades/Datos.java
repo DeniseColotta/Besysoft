@@ -1,11 +1,8 @@
 package com.besysoft.bootcampspringboot.utilidades;
 
-
-
-import com.besysoft.bootcampspringboot.modelos.Genero;
-import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
-import com.besysoft.bootcampspringboot.modelos.Personaje;
-
+import com.besysoft.bootcampspringboot.dominios.Genero;
+import com.besysoft.bootcampspringboot.dominios.PeliculaSerie;
+import com.besysoft.bootcampspringboot.dominios.Personaje;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -38,10 +35,7 @@ public class Datos {
             Personaje spiderman = new Personaje(3L, "Spiderman", 50, 80.0, "Se trata de un superhéroe que emplea sus habilidades sobrehumanas, reminiscentes de una araña, para combatir a otros supervillanos que persiguen fines siniestros.");
             Personaje gru = new Personaje(4L, "Gru", 10, 20.0, "El pequeño Gru es el mayor fan del clan y sueña con ser el nuevo 'salvaje'. Cuando consigue presentarse ante ellos, solo recibe burlas por su edad y su aspecto");
 
-            batman.setPeliculaSeries(List.of(peliculas.get(0)));
-            guazon.setPeliculaSeries(List.of(peliculas.get(0)));
-            spiderman.setPeliculaSeries(List.of(peliculas.get(1)));
-            gru.setPeliculaSeries(List.of(peliculas.get(2)));
+
             personajes.add(batman);
             personajes.add(guazon);
             personajes.add(spiderman);

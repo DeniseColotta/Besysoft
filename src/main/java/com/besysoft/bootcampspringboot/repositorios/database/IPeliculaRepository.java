@@ -1,6 +1,6 @@
 package com.besysoft.bootcampspringboot.repositorios.database;
 
-import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
+import com.besysoft.bootcampspringboot.dominios.PeliculaSerie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

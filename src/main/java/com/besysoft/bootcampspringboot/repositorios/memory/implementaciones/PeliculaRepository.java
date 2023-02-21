@@ -1,6 +1,6 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
-import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
+import com.besysoft.bootcampspringboot.dominios.PeliculaSerie;
 import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IPeliculaRepository;
 import com.besysoft.bootcampspringboot.utilidades.Fecha;
 import org.springframework.stereotype.Repository;
@@ -18,21 +18,22 @@ public class PeliculaRepository implements IPeliculaRepository {
     List<PeliculaSerie> peliculas;
 
 
-    @Override
-    public List<PeliculaSerie> crearPelicula() {
+   public PeliculaRepository(){
         this.peliculas = new ArrayList<>();
 
-        PeliculaSerie batmanPeli = new PeliculaSerie(1L, "Batman", Fecha.formatear("03102000"), 4);
-        PeliculaSerie spidermanPeli = new PeliculaSerie(2L, "Spiderman", Fecha.formatear("04012005"), 4);
-        PeliculaSerie minionsPeli = new PeliculaSerie(3L, "Los Minions", Fecha.formatear("02012010"), 4);
-        PeliculaSerie noMiresPeli = new PeliculaSerie(4L, "No mires para arriba", Fecha.formatear("02092022"), 5);
+        PeliculaSerie batmanPeli = new PeliculaSerie(1L, "Batman", Fecha.formatear("03-10-2000"), 4);
+        PeliculaSerie spidermanPeli = new PeliculaSerie(2L, "Spiderman", Fecha.formatear("04-01-2005"), 4);
+        PeliculaSerie minionsPeli = new PeliculaSerie(3L, "Los Minions", Fecha.formatear("02-01-2010"), 4);
+        PeliculaSerie noMiresPeli = new PeliculaSerie(4L, "No mires para arriba", Fecha.formatear("02-09-2022"), 5);
         peliculas.add(batmanPeli);
         peliculas.add(spidermanPeli);
         peliculas.add(minionsPeli);
         peliculas.add(noMiresPeli);
 
-        return peliculas;
     }
+    @Override
+    public List<PeliculaSerie> obtenerTodos() {
+        return peliculas;}
 
     @Override
     public List<PeliculaSerie> filtrarPeliculaPorFecha(String desde, String hasta) {
@@ -55,10 +56,10 @@ public class PeliculaRepository implements IPeliculaRepository {
     }
 
     @Override
-    public List<PeliculaSerie> agregarPelicula(PeliculaSerie nuevaPelicula) {
+    public PeliculaSerie agregarPelicula(PeliculaSerie nuevaPelicula) {
         nuevaPelicula.setId((long) (peliculas.size() + 1));
         peliculas.add(nuevaPelicula);
-        return peliculas;
+        return nuevaPelicula;
     }
 
     @Override

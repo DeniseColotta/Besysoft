@@ -15,7 +15,7 @@ public class PeliculaSerieRequestDto {
 
     @NotNull
     @NotEmpty
-    @Pattern(regexp = "^[A-Za-z]+$", message = "solamente permite caracteres de la A - Z")
+    @Pattern(regexp = "^[A-Za-z0-9]+$", message = "solamente permite caracteres de la A - Z y números")
     @Size(min = 1, max = 50)
     private String titulo;
 

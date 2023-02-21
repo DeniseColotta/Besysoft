@@ -1,11 +1,12 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
-import com.besysoft.bootcampspringboot.modelos.Personaje;
+import com.besysoft.bootcampspringboot.dominios.Personaje;
 import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IPersonajeRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -13,8 +14,7 @@ public class PersonajeRepository implements IPersonajeRepository {
 
     private List<Personaje> personajes;
 
-    @Override
-    public List<Personaje> crearPersonaje() {
+   public PersonajeRepository(){
         this.personajes = new ArrayList<>();
 
         Personaje batman = new Personaje(1L, "Batman", 40, 90.0, "Batman es la identidad secreta de Bruce Wayne, un empresario multimillonario, galán y filántropo.");
@@ -26,33 +26,36 @@ public class PersonajeRepository implements IPersonajeRepository {
         personajes.add(guazon);
         personajes.add(spiderman);
         personajes.add(gru);
-        return personajes;
+
     }
+    @Override
+    public List<Personaje> obtenerTodos() {
+        return personajes;}
 
     @Override
-    public List<Personaje> filtrarPersonajePorNombre(String nombre) {
-        List<Personaje> personajes = crearPersonaje();
-        return personajes.stream().filter(personaje -> personaje.getNombre().equalsIgnoreCase(nombre)).collect(Collectors.toList());
+    public Optional<Personaje> filtrarPersonajePorNombre(String nombre) {
+        List<Personaje> personajes = obtenerTodos();
+        return personajes.stream().filter(personaje -> personaje.getNombre().equalsIgnoreCase(nombre)).findAny();
     }
 
     @Override
     public List<Personaje> filtrarPersonajesPorEdad(int edad) {
-        List<Personaje> personajes = crearPersonaje();
+        List<Personaje> personajes = obtenerTodos();
         return personajes.stream().filter(personaje -> personaje.getEdad() == edad).collect(Collectors.toList());
     }
 
     @Override
     public List<Personaje> filtrarPersonajesPorRangoEdad(int desde, int hasta) {
-        List<Personaje> personajes = crearPersonaje();
+        List<Personaje> personajes = obtenerTodos();
         return personajes.stream().filter(personaje -> personaje.getEdad() >= desde && personaje.getEdad() <= hasta).collect(Collectors.toList());
     }
 
     @Override
-    public List<Personaje> agregarPersonaje(Personaje nuevoPersonaje) {
-        List<Personaje> personajes = crearPersonaje();
+    public Personaje agregarPersonaje(Personaje nuevoPersonaje) {
+        List<Personaje> personajes = obtenerTodos();
         nuevoPersonaje.setId((long) (personajes.size() + 1));
         personajes.add(nuevoPersonaje);
-        return personajes;
+        return nuevoPersonaje;
     }
 
     @Override

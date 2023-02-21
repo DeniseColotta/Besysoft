@@ -1,12 +1,13 @@
-package com.besysoft.bootcampspringboot.servicios.implementaciones;
+package com.besysoft.bootcampspringboot.servicios.implementacionesDataBase;
 
 import com.besysoft.bootcampspringboot.dto.mapper.IPersonajeMapper;
 import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.PersonajeResponseDto;
-import com.besysoft.bootcampspringboot.modelos.Personaje;
+import com.besysoft.bootcampspringboot.dominios.Personaje;
 import com.besysoft.bootcampspringboot.repositorios.database.IPersonajeRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@ConditionalOnProperty(prefix = "app", name = "type-data", havingValue = "database")
 public class PersonajeServiceImpl implements IPersonajeService {
 
     @Autowired

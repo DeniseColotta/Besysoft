@@ -1,20 +1,21 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.interfaces;
 
-import com.besysoft.bootcampspringboot.modelos.Personaje;
+import com.besysoft.bootcampspringboot.dominios.Personaje;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IPersonajeRepository {
 
-    List<Personaje> crearPersonaje();
+    List<Personaje> obtenerTodos();
 
-    List<Personaje> filtrarPersonajePorNombre(String nombre);
+    Optional<Personaje> filtrarPersonajePorNombre(String nombre);
 
     List<Personaje> filtrarPersonajesPorEdad(int edad);
 
     List<Personaje> filtrarPersonajesPorRangoEdad(int desde, int hasta);
 
-    List<Personaje> agregarPersonaje(Personaje nuevoPersonaje);
+    Personaje agregarPersonaje(Personaje nuevoPersonaje);
 
     Personaje updatePersonaje(long id, Personaje personaje);
 

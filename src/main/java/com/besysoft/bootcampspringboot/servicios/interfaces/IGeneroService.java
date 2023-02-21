@@ -2,7 +2,7 @@ package com.besysoft.bootcampspringboot.servicios.interfaces;
 
 import com.besysoft.bootcampspringboot.dto.request.GeneroRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.GeneroResponseDto;
-import com.besysoft.bootcampspringboot.modelos.Genero;
+import com.besysoft.bootcampspringboot.dominios.Genero;
 
 
 import java.util.List;
@@ -17,7 +17,7 @@ public interface IGeneroService {
 
     GeneroResponseDto updateGenero(long id, GeneroRequestDto genero);
 
-    Optional<Genero> findByNombre(String nombre);
+    //Optional<Genero> findByNombre(String nombre);
 
-    boolean existePorNombre(String nombre);
+   // boolean existePorNombre(String nombre);
 }

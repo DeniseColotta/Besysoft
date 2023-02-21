@@ -1,6 +1,6 @@
 package com.besysoft.bootcampspringboot.dto.mapper;
 
-import com.besysoft.bootcampspringboot.modelos.Personaje;
+import com.besysoft.bootcampspringboot.dominios.Personaje;
 
 import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
 

@@ -2,10 +2,10 @@ package com.besysoft.bootcampspringboot.servicios.interfaces;
 
 import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.PersonajeResponseDto;
-import com.besysoft.bootcampspringboot.modelos.Personaje;
+
 
 import java.util.List;
-import java.util.Optional;
+
 
 
 public interface IPersonajeService {

@@ -1,0 +1,9 @@
+2023-02-21 16:49:00,182 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-21 16:49:00,203 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-21 16:49:01,695 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-21 16:49:02,283 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-9090"]
+2023-02-21 16:49:02,327 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 9090 (http) with context path ''
+2023-02-21 16:49:02,343 INFO org.springframework.boot.StartupInfoLogger [main] Started BootcampSpringBootApplication in 8.965 seconds (JVM running for 10.313)
+2023-02-21 16:49:40,220 INFO org.apache.juli.logging.DirectJDKLog [http-nio-9090-exec-7] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-21 16:49:40,221 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-9090-exec-7] Initializing Servlet 'dispatcherServlet'
+2023-02-21 16:49:40,222 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-9090-exec-7] Completed initialization in 1 ms

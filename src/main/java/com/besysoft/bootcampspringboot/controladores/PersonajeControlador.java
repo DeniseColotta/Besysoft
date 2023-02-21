@@ -6,6 +6,7 @@ import com.besysoft.bootcampspringboot.servicios.interfaces.IPersonajeService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -69,6 +70,7 @@ public class PersonajeControlador {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(servicePersonaje.agregarPersonaje(personajeNuevo));
         } catch (Exception e) {
+            log.info("Ocurrio una validacion personalizada, en el metodo altaPersonaje: " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
@@ -94,6 +96,7 @@ public class PersonajeControlador {
             return ResponseEntity.ok(servicePersonaje.updatePersonaje(id, personaje));
 
         } catch (Exception e) {
+            log.info("Ocurrio una validacion personalizada, en el metodo actualizarPersonaje: " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
 
         }

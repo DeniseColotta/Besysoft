@@ -1,6 +1,5 @@
 package com.besysoft.bootcampspringboot.dto.response;
 
-import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

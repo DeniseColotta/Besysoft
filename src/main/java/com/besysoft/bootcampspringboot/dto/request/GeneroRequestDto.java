@@ -1,6 +1,5 @@
 package com.besysoft.bootcampspringboot.dto.request;
 
-import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;

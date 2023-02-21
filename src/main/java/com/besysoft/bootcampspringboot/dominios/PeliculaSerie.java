@@ -1,6 +1,6 @@
-package com.besysoft.bootcampspringboot.modelos;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package com.besysoft.bootcampspringboot.dominios;
 
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +8,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "peliculas_series")
 public class PeliculaSerie implements Serializable {
@@ -34,49 +40,6 @@ public class PeliculaSerie implements Serializable {
     private List<Personaje> personajes;
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public LocalDate getFechaDeCreacion() {
-        return fechaDeCreacion;
-    }
-
-    public void setFechaDeCreacion(LocalDate fechaDeCreacion) {
-        this.fechaDeCreacion = fechaDeCreacion;
-    }
-
-    public Integer getCalificacion() {
-        return calificacion;
-    }
-
-    public void setCalificacion(Integer calificacion) {
-        this.calificacion = calificacion;
-    }
-
-    public List<Personaje> getPersonaje() {
-        return personajes;
-    }
-
-    public void setPersonaje(List<Personaje> personaje) {
-        this.personajes = personaje;
-    }
-
-
-    public PeliculaSerie() {
-    }
 
     public PeliculaSerie(Long id, String titulo, LocalDate fechaDeCreacion, Integer calificacion) {
         this.id = id;

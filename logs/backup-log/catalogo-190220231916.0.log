@@ -1,3 +1,0 @@
-2023-02-19 19:16:19,468 INFO com.besysoft.bootcampspringboot.controladores.PeliculaControlador [http-nio-9090-exec-7] Ocurrio una validacion, en el metodo crearPelicula().
-2023-02-19 19:16:19,477 INFO com.besysoft.bootcampspringboot.controladores.PeliculaControlador [http-nio-9090-exec-7] Atributo: titulo - Validacion: solamente permite caracteres de la A - Z
-2023-02-19 19:16:19,477 INFO com.besysoft.bootcampspringboot.controladores.PeliculaControlador [http-nio-9090-exec-7] Atributo: calificacion - Validacion: El valor no puede ser mayor a 5

@@ -1,14 +1,15 @@
-package com.besysoft.bootcampspringboot.servicios.implementaciones;
+package com.besysoft.bootcampspringboot.servicios.implementacionesDataBase;
 
 import com.besysoft.bootcampspringboot.dto.mapper.IPeliculaSerieMapper;
 import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.PeliculaSerieResponseDto;
-import com.besysoft.bootcampspringboot.modelos.PeliculaSerie;
+import com.besysoft.bootcampspringboot.dominios.PeliculaSerie;
 
 import com.besysoft.bootcampspringboot.repositorios.database.IPeliculaRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
 import com.besysoft.bootcampspringboot.utilidades.Fecha;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@ConditionalOnProperty(prefix = "app", name = "type-data", havingValue = "database")
 public class PeliculaServiceImpl implements IPeliculaService {
 
     @Autowired

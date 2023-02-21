@@ -6,6 +6,7 @@ import com.besysoft.bootcampspringboot.servicios.interfaces.IGeneroService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -56,6 +57,7 @@ public class GeneroControlador {
                 return ResponseEntity.status(HttpStatus.CREATED).body(generoServicie.agregarGenero(generoNuevo));
 
             } catch (Exception e) {
+                log.info("Ocurrio una validacion personalizada, en el metodo crearGenero: " + e.getMessage());
                 return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
             }
         }
@@ -79,6 +81,7 @@ public class GeneroControlador {
             return ResponseEntity.ok(generoServicie.updateGenero(id, genero));
 
         } catch (Exception e) {
+            log.info("Ocurrio una validacion personalizada, en el metodo actualizarGenero: " + e.getMessage());
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }

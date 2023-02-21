@@ -1,0 +1,1 @@
+2023-02-21 16:40:18,569 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-9090-exec-8] Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; nested exception is java.lang.NumberFormatException: For input string: "fechas"]

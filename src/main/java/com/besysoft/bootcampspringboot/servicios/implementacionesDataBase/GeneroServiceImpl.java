@@ -24,9 +24,12 @@ import java.util.stream.Collectors;
 @ConditionalOnProperty(prefix = "app", name = "type-data", havingValue = "database")
 public class GeneroServiceImpl implements IGeneroService {
 
-    @Autowired
-    private IGeneroRepository repository;
 
+    private final IGeneroRepository repository;
+
+    public GeneroServiceImpl(IGeneroRepository repository) {
+        this.repository=repository;
+    }
     @Autowired
     private IGeneroMapper generoMapper;
 
@@ -87,17 +90,5 @@ public class GeneroServiceImpl implements IGeneroService {
         return generoMapper.mapToDto(genero);
     }
 
-   /* @Transactional(readOnly = true)
-    @Override
-    public Optional<Genero> findByNombre(String nombre) {
-        return repository.findByNombre(nombre);
-    }
 
-    @Transactional(readOnly = true)
-    @Override
-    public boolean existePorNombre(String nombre) {
-        return this.repository.existsByNombre(nombre);
-    }
-}
-*/
 }

@@ -14,7 +14,7 @@ public interface IPeliculaRepository extends JpaRepository<PeliculaSerie,Long> {
     List<PeliculaSerie> findPeliculaByFechaBetween(LocalDate fecha1, LocalDate fecha2);
 
     @Query("select p from PeliculaSerie p where p.calificacion > :desde and p.calificacion < :hasta")
-    List<PeliculaSerie> findPeliculaByCalificacionBetween(int desde, int hasta);
+    List<PeliculaSerie> findPeliculaByCalificacionBetween(Integer desde, Integer hasta);
 
     @Query("select p from PeliculaSerie p where p.titulo = :titulo")
     Optional<PeliculaSerie> findPeliculaByTitulo(String titulo);

@@ -17,7 +17,5 @@ public interface IGeneroService {
 
     GeneroResponseDto updateGenero(long id, GeneroRequestDto genero);
 
-    //Optional<Genero> findByNombre(String nombre);
 
-   // boolean existePorNombre(String nombre);
 }

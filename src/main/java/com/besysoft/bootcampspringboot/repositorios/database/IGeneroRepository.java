@@ -15,5 +15,5 @@ public interface IGeneroRepository extends JpaRepository<Genero, Long> {
     @Query("select g from Genero g where g.nombre like :nombreGenero")
     List<Genero> findGeneroByPelicula(String nombreGenero);
 
-    boolean existsByNombre(String nombre);
+
 }

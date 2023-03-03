@@ -129,37 +129,36 @@ class PersonajeServiceImplTest {
     @Test
     void updatePersonaje() {
         Personaje personajeExistente = DatosDummy.getPersonajeUno();
-
         when(repository.findById(1L)).thenReturn(Optional.of(personajeExistente));
 
         PersonajeRequestDto personajeAct = new PersonajeRequestDto();
-        personajeAct.setId(personajeExistente.getId());
+        personajeAct.setId(1L);
         personajeAct.setNombre("Personaje5");
         personajeAct.setEdad(70);
         personajeAct.setPeso(60D);
         personajeAct.setHistoria(null);
 
-
-        Personaje personajeModificado = new Personaje();
-        personajeModificado.setId(1L);
-        personajeModificado.setNombre(personajeAct.getNombre());
-        personajeModificado.setEdad(personajeAct.getEdad());
-        personajeModificado.setPeso(personajeAct.getPeso());
-        personajeModificado.setHistoria(personajeAct.getHistoria());
-
         mapper.mapToEntity(personajeAct);
 
-        PersonajeResponseDto personajeResponseDto = new PersonajeResponseDto();
-        personajeResponseDto.setId(personajeModificado.getId());
-        personajeResponseDto.setNombre(personajeModificado.getNombre());
-        personajeResponseDto.setEdad(personajeModificado.getEdad());
-        personajeResponseDto.setPeso(personajeModificado.getPeso());
-        personajeResponseDto.setHistoria(personajeModificado.getHistoria());
+        personajeExistente.setNombre(personajeAct.getNombre());
+        personajeExistente.setEdad(personajeAct.getEdad());
+        personajeExistente.setPeso(personajeAct.getPeso());
+        personajeExistente.setHistoria(personajeAct.getHistoria());
 
-        mapper.mapToDto(personajeModificado);
+        when(repository.save(any(Personaje.class))).thenReturn(personajeExistente);
+
+        mapper.mapToDto(personajeExistente);
+        PersonajeResponseDto personajeResponseDto = new PersonajeResponseDto();
+        personajeResponseDto.setId(personajeExistente.getId());
+        personajeResponseDto.setNombre(personajeExistente.getNombre());
+        personajeResponseDto.setEdad(personajeExistente.getEdad());
+        personajeResponseDto.setPeso(personajeExistente.getPeso());
+        personajeResponseDto.setHistoria(personajeExistente.getHistoria());
 
         PersonajeResponseDto resultado = service.updatePersonaje(1L, personajeAct);
 
-        assertEquals(resultado, personajeResponseDto);
+        assertEquals(personajeResponseDto, resultado);
+
     }
+
 }

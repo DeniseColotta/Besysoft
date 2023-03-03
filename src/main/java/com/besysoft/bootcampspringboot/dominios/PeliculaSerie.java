@@ -30,7 +30,6 @@ public class PeliculaSerie implements Serializable {
 
     private Integer calificacion;
 
-    //@JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "personajes_peliculas_series",

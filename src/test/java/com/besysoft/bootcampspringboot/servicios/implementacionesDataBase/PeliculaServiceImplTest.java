@@ -144,24 +144,25 @@ class PeliculaServiceImplTest {
         peliculaAct.setFechaDeCreacion(peliculaExistente.getFechaDeCreacion());
         peliculaAct.setCalificacion(peliculaExistente.getCalificacion());
 
-        PeliculaSerie peliculaModificado = new PeliculaSerie();
-        peliculaModificado.setId(1L);
-        peliculaModificado.setTitulo(peliculaAct.getTitulo());
-        peliculaModificado.setFechaDeCreacion(peliculaAct.getFechaDeCreacion());
-        peliculaModificado.setCalificacion(peliculaAct.getCalificacion());
 
         mapper.mapToEntity(peliculaAct);
+        peliculaExistente.setId(peliculaAct.getId());
+        peliculaExistente.setTitulo(peliculaAct.getTitulo());
+        peliculaExistente.setFechaDeCreacion(peliculaAct.getFechaDeCreacion());
+        peliculaExistente.setCalificacion(peliculaAct.getCalificacion());
 
-        PeliculaSerieResponseDto peliculaResponseDto = new PeliculaSerieResponseDto();
-        peliculaResponseDto.setId(peliculaModificado.getId());
-        peliculaResponseDto.setTitulo(peliculaModificado.getTitulo());
-        peliculaResponseDto.setFechaDeCreacion(peliculaModificado.getFechaDeCreacion());
-        peliculaResponseDto.setCalificacion(peliculaModificado.getCalificacion());
+        when(repository.save(any(PeliculaSerie.class))).thenReturn(peliculaExistente);
 
-        mapper.mapToDto(peliculaModificado);
+        mapper.mapToDto(peliculaExistente);
+        PeliculaSerieResponseDto peliculaSerieResponseDto = new PeliculaSerieResponseDto();
+        peliculaSerieResponseDto.setId(peliculaExistente.getId());
+        peliculaSerieResponseDto.setTitulo(peliculaExistente.getTitulo());
+        peliculaSerieResponseDto.setFechaDeCreacion(peliculaExistente.getFechaDeCreacion());
+        peliculaSerieResponseDto .setCalificacion(peliculaExistente.getCalificacion());
+
 
         PeliculaSerieResponseDto resultado = service.updatePelicula(1L, peliculaAct);
 
-        assertEquals(resultado, peliculaResponseDto);
+        assertEquals(peliculaSerieResponseDto, resultado);
     }
 }

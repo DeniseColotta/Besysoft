@@ -1,6 +1,4 @@
 package com.besysoft.bootcampspringboot.servicios.ImplementacionesMemoria;
-
-
 import com.besysoft.bootcampspringboot.dominios.Genero;
 
 import com.besysoft.bootcampspringboot.dto.mapper.IGeneroMapper;
@@ -11,21 +9,19 @@ import com.besysoft.bootcampspringboot.servicios.interfaces.IGeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @ConditionalOnProperty(prefix = "app", name = "type-data", havingValue = "memory")
-    public class GeneroServiceMemoriaImpl implements IGeneroService {
+public class GeneroServiceMemoriaImpl implements IGeneroService {
 
-        @Autowired
-        private IGeneroRepository repositoryGenero;
+    @Autowired
+    private IGeneroRepository repositoryGenero;
 
-        @Autowired
-        private IGeneroMapper generoMapper;
+    @Autowired
+    private IGeneroMapper generoMapper;
 
     @Override
     public List<GeneroResponseDto> getAll() {
@@ -36,6 +32,7 @@ import java.util.stream.Collectors;
 
         return generoDto;
     }
+
     @Override
     public List<GeneroResponseDto> filtrarPeliculaPorGenero(String nombreGenero) {
 
@@ -52,7 +49,6 @@ import java.util.stream.Collectors;
     }
 
 
-
     @Override
     public GeneroResponseDto agregarGenero(GeneroRequestDto nuevoGenero) {
         Optional<Genero> oGenero = repositoryGenero.buscarGenero(nuevoGenero.getNombre());
@@ -62,7 +58,7 @@ import java.util.stream.Collectors;
         }
 
 
-        Genero genero= repositoryGenero.agregarGenero(generoMapper.mapToEntity(nuevoGenero));
+        Genero genero = repositoryGenero.agregarGenero(generoMapper.mapToEntity(nuevoGenero));
         return generoMapper.mapToDto(genero);
 
     }
@@ -70,7 +66,7 @@ import java.util.stream.Collectors;
 
     @Override
     public GeneroResponseDto updateGenero(long id, GeneroRequestDto generoAct) {
-        Optional<Genero> oGenero =  repositoryGenero.obtenerTodos().stream().
+        Optional<Genero> oGenero = repositoryGenero.obtenerTodos().stream().
                 filter(pr -> pr.getId() == id)
                 .findAny();
 
@@ -79,14 +75,10 @@ import java.util.stream.Collectors;
 
         }
         generoAct.setNombre(generoAct.getNombre());
-        Genero genero=repositoryGenero.updateGenero(id,generoMapper.mapToEntity(generoAct));
+        Genero genero = repositoryGenero.updateGenero(id, generoMapper.mapToEntity(generoAct));
         return generoMapper.mapToDto(genero);
-    }}
-
-    /*    @Override
-        public Optional<Genero> buscarGenero(String nombre) {
-            return repositoryGenero.buscarGenero(nombre);
-        }
     }
 }
-*/
+
+
+

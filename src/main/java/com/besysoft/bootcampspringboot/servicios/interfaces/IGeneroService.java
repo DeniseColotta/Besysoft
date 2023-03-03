@@ -6,7 +6,7 @@ import com.besysoft.bootcampspringboot.dominios.Genero;
 
 
 import java.util.List;
-import java.util.Optional;
+
 
 public interface IGeneroService {
     List<GeneroResponseDto> getAll();

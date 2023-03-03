@@ -1,7 +1,6 @@
 package com.besysoft.bootcampspringboot.repositorios.memory.implementaciones;
 
 import com.besysoft.bootcampspringboot.dominios.Genero;
-import com.besysoft.bootcampspringboot.dominios.PeliculaSerie;
 import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IGeneroRepository;
 import org.springframework.stereotype.Repository;
 

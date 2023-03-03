@@ -6,7 +6,6 @@ import com.besysoft.bootcampspringboot.servicios.interfaces.IPersonajeService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -54,7 +53,7 @@ public class PersonajeControlador {
 
     @PostMapping()
     public ResponseEntity<?> altaPersonaje(@Valid @RequestBody PersonajeRequestDto personajeNuevo, BindingResult result) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
 
             Map<String, String> validaciones = new HashMap<>();
             log.info("Ocurrio una validacion, en el metodo altaPersonaje().");
@@ -79,8 +78,8 @@ public class PersonajeControlador {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> actualizarPersonaje(@PathVariable Long id,
-                                                 @Valid @RequestBody PersonajeRequestDto personaje,BindingResult result) {
-        if(result.hasErrors()) {
+                                                 @Valid @RequestBody PersonajeRequestDto personaje, BindingResult result) {
+        if (result.hasErrors()) {
 
             Map<String, String> validaciones = new HashMap<>();
             log.info("Ocurrio una validacion, en el metodo actualizarPersonaje().");

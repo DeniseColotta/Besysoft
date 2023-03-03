@@ -1,13 +1,9 @@
 package com.besysoft.bootcampspringboot.controladores;
-
-
 import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
 
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -61,7 +57,7 @@ public class PeliculaControlador {
     @PostMapping
     public ResponseEntity<?> crearPelicula(@Valid @RequestBody PeliculaSerieRequestDto peliculaNueva, BindingResult result) {
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
 
             Map<String, String> validaciones = new HashMap<>();
             log.info("Ocurrio una validacion, en el metodo crearPelicula().");
@@ -86,9 +82,9 @@ public class PeliculaControlador {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> actualizarPelicula(@PathVariable Long id,
-                                                @Valid @RequestBody PeliculaSerieRequestDto peliculaNueva,BindingResult result) {
+                                                @Valid @RequestBody PeliculaSerieRequestDto peliculaNueva, BindingResult result) {
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
 
             Map<String, String> validaciones = new HashMap<>();
             log.info("Ocurrio una validacion, en el metodo actualizarPelicula().");

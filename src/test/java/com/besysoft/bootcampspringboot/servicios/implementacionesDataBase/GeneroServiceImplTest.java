@@ -2,20 +2,26 @@ package com.besysoft.bootcampspringboot.servicios.implementacionesDataBase;
 
 import com.besysoft.bootcampspringboot.datos.DatosDummy;
 import com.besysoft.bootcampspringboot.dominios.Genero;
+import com.besysoft.bootcampspringboot.dominios.Personaje;
 import com.besysoft.bootcampspringboot.dto.mapper.IGeneroMapper;
 import com.besysoft.bootcampspringboot.dto.request.GeneroRequestDto;
+import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.GeneroResponseDto;
+import com.besysoft.bootcampspringboot.dto.response.PersonajeResponseDto;
 import com.besysoft.bootcampspringboot.repositorios.database.IGeneroRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IGeneroService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +50,6 @@ class GeneroServiceImplTest {
 
     }
 
-
     @Test
     void getAll() {
         when(repository.findAll())
@@ -58,16 +63,18 @@ class GeneroServiceImplTest {
 
     @Test
     void filtrarPeliculaPorGenero() {
-
-        String genero = "comedia";
-        when(repository.findGeneroByPelicula(genero)).thenReturn(DatosDummy.getGeneros());
-        List<GeneroResponseDto> resultado = service.filtrarPeliculaPorGenero(genero);
-
-        assertThat(resultado.size()).isEqualTo(1);
-        assertFalse(resultado.isEmpty());
-        assertEquals(resultado.get(0).getNombre(), genero);
+        String nombreGenero = "comedia";
+        Genero generoBuscado = DatosDummy.getGeneroUno();
+        Optional<Genero> optionalGenero = Optional.of(generoBuscado);
+        when(repository.findByNombre(nombreGenero)).thenReturn(optionalGenero);
+        List<Genero> generos = Arrays.asList(DatosDummy.getGeneroUno(), DatosDummy.getGeneroDos());
+        when(repository.findGeneroByPelicula(nombreGenero)).thenReturn(generos);
+        List<GeneroResponseDto> resultado = service.filtrarPeliculaPorGenero(nombreGenero);
+        List<GeneroResponseDto> generoEsperadoPorPelicula = generos.stream()
+                .map(mapper::mapToDto)
+                .collect(Collectors.toList());
+        assertEquals(generoEsperadoPorPelicula, resultado);
     }
-
 
 
     @Test
@@ -91,31 +98,26 @@ class GeneroServiceImplTest {
     void updateGenero() {
 
         Genero generoExistente = DatosDummy.getGeneroUno();
-
         when(repository.findById(1L)).thenReturn(Optional.of(generoExistente));
 
         GeneroRequestDto generoAct = new GeneroRequestDto();
-        generoAct.setId(generoExistente.getId());
-        generoAct.setNombre("Infantil");
-        generoAct.setPeliculas(null);
-
-        Genero generoModificado = new Genero();
-        generoModificado.setId(1L);
-        generoModificado.setNombre(generoAct.getNombre());
-        generoModificado.setPeliculaSerie(null);
+        generoAct.setId(1L);
+        generoAct.setNombre("Terror");
 
         mapper.mapToEntity(generoAct);
 
-        GeneroResponseDto generoResponseDto = new GeneroResponseDto();
-        generoResponseDto.setId(generoModificado.getId());
-        generoResponseDto.setNombre(generoModificado.getNombre());
-        generoResponseDto.setPeliculas(null);
+        generoExistente.setNombre(generoAct.getNombre());
 
-        mapper.mapToDto(generoModificado);
+        when(repository.save(any(Genero.class))).thenReturn(generoExistente);
+
+        mapper.mapToDto(generoExistente);
+        GeneroResponseDto generoResponseDto = new GeneroResponseDto();
+        generoResponseDto.setId(generoExistente.getId());
+        generoResponseDto.setNombre(generoExistente.getNombre());
 
         GeneroResponseDto resultado = service.updateGenero(1L, generoAct);
 
-        assertEquals(resultado, generoResponseDto);
+        assertEquals(generoResponseDto, resultado);
     }
 
 

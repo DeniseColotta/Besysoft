@@ -10,9 +10,8 @@ import com.besysoft.bootcampspringboot.repositorios.database.IGeneroRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IGeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Primary;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +27,9 @@ public class GeneroServiceImpl implements IGeneroService {
     private final IGeneroRepository repository;
 
     public GeneroServiceImpl(IGeneroRepository repository) {
-        this.repository=repository;
+        this.repository = repository;
     }
+
     @Autowired
     private IGeneroMapper generoMapper;
 

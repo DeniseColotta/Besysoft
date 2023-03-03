@@ -1,12 +1,8 @@
 package com.besysoft.bootcampspringboot.controladores;
-
 import com.besysoft.bootcampspringboot.dto.request.GeneroRequestDto;
-
 import com.besysoft.bootcampspringboot.servicios.interfaces.IGeneroService;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -53,18 +49,18 @@ public class GeneroControlador {
                     });
             return ResponseEntity.badRequest().body(validaciones);
         }
-            try {
-                return ResponseEntity.status(HttpStatus.CREATED).body(generoServicie.agregarGenero(generoNuevo));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(generoServicie.agregarGenero(generoNuevo));
 
-            } catch (Exception e) {
-                log.info("Ocurrio una validacion personalizada, en el metodo crearGenero: " + e.getMessage());
-                return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-            }
+        } catch (Exception e) {
+            log.info("Ocurrio una validacion personalizada, en el metodo crearGenero: " + e.getMessage());
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @Valid@RequestBody GeneroRequestDto genero,BindingResult result) {
-        if(result.hasErrors()){
+    public ResponseEntity<?> actualizarGenero(@PathVariable Long id, @Valid @RequestBody GeneroRequestDto genero, BindingResult result) {
+        if (result.hasErrors()) {
 
             Map<String, String> validaciones = new HashMap<>();
             log.info("Ocurrio una validacion, en el metodo actualizarGenero().");

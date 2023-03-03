@@ -1,19 +1,14 @@
 package com.besysoft.bootcampspringboot.servicios.implementacionesDataBase;
-
 import com.besysoft.bootcampspringboot.datos.DatosDummy;
 import com.besysoft.bootcampspringboot.dominios.Genero;
-import com.besysoft.bootcampspringboot.dominios.Personaje;
 import com.besysoft.bootcampspringboot.dto.mapper.IGeneroMapper;
 import com.besysoft.bootcampspringboot.dto.request.GeneroRequestDto;
-import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.GeneroResponseDto;
-import com.besysoft.bootcampspringboot.dto.response.PersonajeResponseDto;
 import com.besysoft.bootcampspringboot.repositorios.database.IGeneroRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IGeneroService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -52,12 +47,19 @@ class GeneroServiceImplTest {
 
     @Test
     void getAll() {
+        List<GeneroResponseDto> esperado = DatosDummy.getGeneros()
+                .stream()
+                .map(this.mapper::mapToDto)
+                .collect(Collectors.toList());
+
         when(repository.findAll())
                 .thenReturn(DatosDummy.getGeneros());
-        List<GeneroResponseDto> iterableGeneros = service.getAll();
+        List<GeneroResponseDto> resultado = service.getAll();
 
-        assertThat(iterableGeneros.size()).isEqualTo(3);
+
+        assertThat(resultado.size()).isEqualTo(3);
         verify(repository, times(1)).findAll();
+        assertEquals(esperado,resultado);
     }
 
 

@@ -4,6 +4,7 @@ import com.besysoft.bootcampspringboot.datos.DatosDummy;
 import com.besysoft.bootcampspringboot.dominios.PeliculaSerie;
 import com.besysoft.bootcampspringboot.dto.mapper.IPeliculaSerieMapper;
 import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
+import com.besysoft.bootcampspringboot.dto.response.GeneroResponseDto;
 import com.besysoft.bootcampspringboot.dto.response.PeliculaSerieResponseDto;
 import com.besysoft.bootcampspringboot.repositorios.database.IPeliculaRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,27 +49,38 @@ class PeliculaServiceImplTest {
 
         @Test
         void getAll() {
+            List<PeliculaSerieResponseDto> esperado = DatosDummy.getPeliculas()
+                    .stream()
+                    .map(this.mapper::mapToDto)
+                    .collect(Collectors.toList());
+
             when(repository.findAll())
                     .thenReturn(DatosDummy.getPeliculas());
-            List<PeliculaSerieResponseDto> peliculas= service.getAll();
+            List<PeliculaSerieResponseDto> resultado= service.getAll();
 
-            assertThat(peliculas.size()).isEqualTo(3);
+            assertThat(resultado.size()).isEqualTo(3);
             verify(repository,times(1)).findAll();
+            assertEquals(esperado,resultado);
         }
 
 
    @Test
     void testFiltrarPeliculaPorFecha() {
+       List<PeliculaSerieResponseDto> esperado = DatosDummy.getPeliculas()
+               .stream()
+               .map(mapper::mapToDto)
+               .collect(Collectors.toList());
+
         LocalDate desde = LocalDate.of(2022, 1, 1);
         LocalDate hasta = LocalDate.of(2022, 12, 31);
 
-
         when(repository.findPeliculaByFechaBetween(desde, hasta)).thenReturn(DatosDummy.getPeliculas());
 
-        List<PeliculaSerieResponseDto> result = service.filtrarPeliculaPorFecha("01-01-2022", "31-12-2022");
+        List<PeliculaSerieResponseDto> resultado = service.filtrarPeliculaPorFecha("01-01-2022", "31-12-2022");
 
-        assertThat(result).hasSize(3);
+        assertThat(resultado).hasSize(3);
        verify(repository).findPeliculaByFechaBetween(desde,hasta);
+       assertEquals(esperado,resultado);
 
 }
 
@@ -76,13 +89,18 @@ class PeliculaServiceImplTest {
         Integer calificacion1= 4;
         Integer calificacion2= 5;
 
+        List<PeliculaSerieResponseDto> esperado = DatosDummy.getPeliculas()
+                .stream()
+                .map(mapper::mapToDto)
+                .collect(Collectors.toList());
 
         when(repository.findPeliculaByCalificacionBetween(calificacion1, calificacion2)).thenReturn(DatosDummy.getPeliculas());
 
-        List<PeliculaSerieResponseDto> result = service.filtrarPeliculaPorCalificacion(4,5);
+        List<PeliculaSerieResponseDto> resultado = service.filtrarPeliculaPorCalificacion(4,5);
 
-        assertThat(result).hasSize(3);
+        assertThat(resultado).hasSize(3);
         verify(repository).findPeliculaByCalificacionBetween(calificacion1,calificacion2);
+        assertEquals(esperado,resultado);
     }
 
     @Test
@@ -107,7 +125,6 @@ class PeliculaServiceImplTest {
 
 
     }
-//si
     @Test
     void agregarPelicula() {
 

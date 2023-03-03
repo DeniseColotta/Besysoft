@@ -4,6 +4,7 @@ import com.besysoft.bootcampspringboot.datos.DatosDummy;
 import com.besysoft.bootcampspringboot.dominios.Personaje;
 import com.besysoft.bootcampspringboot.dto.mapper.IPersonajeMapper;
 import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
+
 import com.besysoft.bootcampspringboot.dto.response.PersonajeResponseDto;
 import com.besysoft.bootcampspringboot.repositorios.database.IPersonajeRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPersonajeService;
@@ -16,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,18 +46,25 @@ class PersonajeServiceImplTest {
 
     @Test
     void getAll() {
-            when(repository.findAll())
-                    .thenReturn(DatosDummy.getPersonajes());
-            List<PersonajeResponseDto> personajes= service.getAll();
+        List<PersonajeResponseDto> esperado = DatosDummy.getPersonajes()
+                .stream()
+                .map(this.mapper::mapToDto)
+                .collect(Collectors.toList());
 
-            assertThat(personajes.size()).isEqualTo(2);
-            verify(repository,times(1)).findAll();
-        }
+        when(repository.findAll())
+                .thenReturn(DatosDummy.getPersonajes());
+        List<PersonajeResponseDto> resultado = service.getAll();
+
+
+        assertThat(resultado.size()).isEqualTo(2);
+        verify(repository, times(1)).findAll();
+        assertEquals(esperado, resultado);
+    }
 
 
     @Test
     void filtrarPersonajePorNombre() {
-        String nombre= "Personaje1";
+        String nombre = "Personaje1";
 
         when(repository.findPersonajeByNombre(nombre)).thenReturn(Optional.of(DatosDummy.getPersonajeUno()));
 
@@ -70,13 +79,18 @@ class PersonajeServiceImplTest {
 
         PersonajeResponseDto result = service.filtrarPersonajePorNombre(nombre);
 
-        assertEquals(result,personajeDto);
+        assertEquals(result, personajeDto);
         verify(repository).findPersonajeByNombre(nombre);
     }
 
     @Test
     void filtrarPersonajesPorEdad() {
-        Integer edad1= 10;
+        Integer edad1 = 10;
+
+        List<PersonajeResponseDto> esperado = DatosDummy.getPersonajes()
+                .stream()
+                .map(mapper::mapToDto)
+                .collect(Collectors.toList());
 
         when(repository.findPersonajesByEdad(edad1)).thenReturn(DatosDummy.getPersonajes());
 
@@ -84,23 +98,28 @@ class PersonajeServiceImplTest {
 
         assertThat(result).hasSize(2);
         verify(repository).findPersonajesByEdad(edad1);
+        assertEquals(result, esperado);
     }
-//si
+
     @Test
     void filtrarPersonajesPorRangoEdad() {
-        Integer edad1= 10;
-        Integer edad2=60;
+        Integer edad1 = 10;
+        Integer edad2 = 60;
+        List<PersonajeResponseDto> esperado = DatosDummy.getPersonajes()
+                .stream()
+                .map(mapper::mapToDto)
+                .collect(Collectors.toList());
 
+        when(repository.findPersonajesByRangoEdadBetween(edad1, edad2)).thenReturn(DatosDummy.getPersonajes());
 
-        when(repository.findPersonajesByRangoEdadBetween(edad1,edad2)).thenReturn(DatosDummy.getPersonajes());
+        List<PersonajeResponseDto> resultado = service.filtrarPersonajesPorRangoEdad(10, 60);
 
-        List<PersonajeResponseDto> result = service.filtrarPersonajesPorRangoEdad(10,60);
-
-        assertThat(result).hasSize(2);
-        verify(repository).findPersonajesByRangoEdadBetween(edad1,edad2);
+        assertThat(resultado).hasSize(2);
+        verify(repository).findPersonajesByRangoEdadBetween(edad1, edad2);
+        assertEquals(esperado,resultado);
     }
 
-    //si
+
     @Test
     void agregarPersonaje() {
         PersonajeRequestDto requestDto = new PersonajeRequestDto();
@@ -108,7 +127,7 @@ class PersonajeServiceImplTest {
         requestDto.setEdad(10);
         requestDto.setPeso(30D);
         requestDto.setHistoria(null);
-        Personaje personajeEntity = new Personaje(1L, requestDto.getNombre(),requestDto.getEdad(),requestDto.getPeso(),null);
+        Personaje personajeEntity = new Personaje(5L, requestDto.getNombre(), requestDto.getEdad(), requestDto.getPeso(), null);
 
         PersonajeResponseDto responseDto = new PersonajeResponseDto();
         responseDto.setId(personajeEntity.getId());

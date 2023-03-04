@@ -1,27 +1,24 @@
-2023-03-04 11:48:03,713 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.2.5.Final
-2023-03-04 11:48:03,743 INFO org.springframework.boot.StartupInfoLogger [main] Starting BootcampSpringBootApplication using Java 17.0.2 on DESKTOP-0N956L7 with PID 4604 (C:\Users\Dell PC\Downloads\bootcamp-spring-boot (1)\bootcamp-spring-boot\target\classes started by Dell PC in C:\Users\Dell PC\Downloads\bootcamp-spring-boot (1)\bootcamp-spring-boot)
-2023-03-04 11:48:03,745 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
-2023-03-04 11:48:05,691 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-03-04 11:48:05,844 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 113 ms. Found 3 JPA repository interfaces.
-2023-03-04 11:48:06,899 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 9090 (http)
-2023-03-04 11:48:06,916 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-9090"]
-2023-03-04 11:48:06,917 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
-2023-03-04 11:48:06,918 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.70]
-2023-03-04 11:48:07,136 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
-2023-03-04 11:48:07,137 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 3246 ms
-2023-03-04 11:48:07,192 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
-2023-03-04 11:48:07,521 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
-2023-03-04 11:48:07,543 INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration [main] H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
-2023-03-04 11:48:07,786 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-03-04 11:48:07,872 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.6.14.Final
-2023-03-04 11:48:08,175 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-03-04 11:48:08,349 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2023-03-04 11:48:09,486 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-03-04 11:48:09,501 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-03-04 11:48:10,659 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-03-04 11:48:11,277 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-9090"]
-2023-03-04 11:48:11,309 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 9090 (http) with context path ''
-2023-03-04 11:48:11,782 INFO org.springframework.boot.StartupInfoLogger [main] Started BootcampSpringBootApplication in 8.843 seconds (JVM running for 10.301)
-2023-03-04 11:48:47,629 INFO org.apache.juli.logging.DirectJDKLog [http-nio-9090-exec-6] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-03-04 11:48:47,630 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-9090-exec-6] Initializing Servlet 'dispatcherServlet'
-2023-03-04 11:48:47,638 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-9090-exec-6] Completed initialization in 8 ms
+2023-03-04 14:41:01,846 INFO org.hibernate.validator.internal.util.Version [background-preinit] HV000001: Hibernate Validator 6.2.5.Final
+2023-03-04 14:41:01,859 INFO org.springframework.boot.StartupInfoLogger [main] Starting BootcampSpringBootApplication using Java 17.0.2 on DESKTOP-0N956L7 with PID 1424 (C:\Users\Dell PC\Downloads\bootcamp-spring-boot (1)\bootcamp-spring-boot\target\classes started by Dell PC in C:\Users\Dell PC\Downloads\bootcamp-spring-boot (1)\bootcamp-spring-boot)
+2023-03-04 14:41:01,864 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2023-03-04 14:41:03,919 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-04 14:41:04,052 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 112 ms. Found 3 JPA repository interfaces.
+2023-03-04 14:41:05,231 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 9090 (http)
+2023-03-04 14:41:05,256 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-9090"]
+2023-03-04 14:41:05,257 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2023-03-04 14:41:05,258 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.70]
+2023-03-04 14:41:05,536 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2023-03-04 14:41:05,536 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 3527 ms
+2023-03-04 14:41:05,589 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2023-03-04 14:41:05,985 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2023-03-04 14:41:06,005 INFO org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration [main] H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2023-03-04 14:41:06,246 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-04 14:41:06,356 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-03-04 14:41:06,678 INFO org.hibernate.annotations.common.reflection.java.JavaReflectionManager [main] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-03-04 14:41:06,907 INFO org.hibernate.dialect.Dialect [main] HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-03-04 14:41:08,178 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-04 14:41:08,196 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-04 14:41:09,462 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-04 14:41:10,103 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-9090"]
+2023-03-04 14:41:10,146 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 9090 (http) with context path ''
+2023-03-04 14:41:10,624 INFO org.springframework.boot.StartupInfoLogger [main] Started BootcampSpringBootApplication in 9.524 seconds (JVM running for 10.875)

@@ -26,6 +26,7 @@ class IPersonajeRepositoryTest {
         repository.save(DatosDummy.getPersonajeUno());
         repository.save( DatosDummy.getPersonajeDos());
 
+
     }
     @AfterEach
     void tearDown() {

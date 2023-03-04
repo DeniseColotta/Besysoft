@@ -7,8 +7,7 @@ import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PeliculaSerieRequestDto {

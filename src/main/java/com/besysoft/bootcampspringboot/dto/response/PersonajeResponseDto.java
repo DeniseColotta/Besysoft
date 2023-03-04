@@ -1,13 +1,14 @@
 package com.besysoft.bootcampspringboot.dto.response;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Size;
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class PersonajeResponseDto {
     private Long id;
     private String nombre;

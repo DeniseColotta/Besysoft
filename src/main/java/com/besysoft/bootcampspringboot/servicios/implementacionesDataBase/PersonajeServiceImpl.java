@@ -4,6 +4,9 @@ import com.besysoft.bootcampspringboot.dto.mapper.IPersonajeMapper;
 import com.besysoft.bootcampspringboot.dto.request.PersonajeRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.PersonajeResponseDto;
 import com.besysoft.bootcampspringboot.dominios.Personaje;
+import com.besysoft.bootcampspringboot.excepciones.ExistException;
+import com.besysoft.bootcampspringboot.excepciones.NotFoundException;
+
 import com.besysoft.bootcampspringboot.repositorios.database.IPersonajeRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPersonajeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +81,8 @@ public class PersonajeServiceImpl implements IPersonajeService {
         Optional<Personaje> oPersonaje = repository.findPersonajeByNombre(nuevoPersonaje.getNombre());
 
         if (oPersonaje.isPresent()) {
-            throw new RuntimeException("El personaje ingresado ya existe");
+            throw new ExistException(String.format("el personaje %s ya existe", nuevoPersonaje.getNombre()),
+                    new RuntimeException("Causa Original"));
         }
         Personaje personaje= repository.save(personajeMapper.mapToEntity(nuevoPersonaje));
         return personajeMapper.mapToDto(personaje);
@@ -91,7 +95,8 @@ public class PersonajeServiceImpl implements IPersonajeService {
         Optional<Personaje> oPersonaje = repository.findById(id);
 
         if (!oPersonaje.isPresent()) {
-            throw new RuntimeException("El Id ingresado no existe");
+            throw new NotFoundException(String.format("el id %s ingresado no existe", id),
+                    new RuntimeException("Causa Original"));
 
         }
         personajeAct.setNombre(personajeAct.getNombre());

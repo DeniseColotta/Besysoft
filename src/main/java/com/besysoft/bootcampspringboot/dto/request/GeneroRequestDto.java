@@ -1,14 +1,16 @@
 package com.besysoft.bootcampspringboot.dto.request;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class GeneroRequestDto {
 
     private Long id;

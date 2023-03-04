@@ -1,12 +1,13 @@
 package com.besysoft.bootcampspringboot.dto.response;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class GeneroResponseDto {
 
     private Long id;

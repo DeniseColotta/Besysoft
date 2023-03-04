@@ -4,6 +4,8 @@ import com.besysoft.bootcampspringboot.dominios.PeliculaSerie;
 import com.besysoft.bootcampspringboot.dto.mapper.IPeliculaSerieMapper;
 import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.PeliculaSerieResponseDto;
+import com.besysoft.bootcampspringboot.excepciones.ExistException;
+import com.besysoft.bootcampspringboot.excepciones.NotFoundException;
 import com.besysoft.bootcampspringboot.repositorios.memory.interfaces.IPeliculaRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +82,8 @@ public class PeliculaServiceMemoriaImpl implements IPeliculaService {
         Optional<PeliculaSerie> oPelicula = repositoryPelicula.filtrarPeliculaTitulo(nuevaPelicula.getTitulo());
 
         if (oPelicula.isPresent()) {
-            throw new RuntimeException("La película ingresada ya existe");
+            throw new ExistException(String.format("la pelicula %s ya existe", nuevaPelicula.getTitulo()),
+                    new RuntimeException("Causa Original"));
         }
         PeliculaSerie pelicula = repositoryPelicula.agregarPelicula(peliculaMapper.mapToEntity(nuevaPelicula));
         return peliculaMapper.mapToDto(pelicula);
@@ -95,7 +98,8 @@ public class PeliculaServiceMemoriaImpl implements IPeliculaService {
                 .findAny();
 
         if (!oPelicula.isPresent()) {
-            throw new RuntimeException("El Id ingresado no existe");
+            throw new NotFoundException(String.format("el id %s ingresado no existe", id),
+                    new RuntimeException("Causa Original"));
         }
         pelicula.setTitulo(pelicula.getTitulo());
         pelicula.setCalificacion(pelicula.getCalificacion());

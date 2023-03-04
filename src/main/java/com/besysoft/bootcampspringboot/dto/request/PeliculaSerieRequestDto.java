@@ -1,15 +1,14 @@
 package com.besysoft.bootcampspringboot.dto.request;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class PeliculaSerieRequestDto {

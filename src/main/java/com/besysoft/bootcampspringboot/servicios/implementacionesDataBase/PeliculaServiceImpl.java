@@ -5,6 +5,9 @@ import com.besysoft.bootcampspringboot.dto.request.PeliculaSerieRequestDto;
 import com.besysoft.bootcampspringboot.dto.response.PeliculaSerieResponseDto;
 import com.besysoft.bootcampspringboot.dominios.PeliculaSerie;
 
+import com.besysoft.bootcampspringboot.excepciones.ExistException;
+import com.besysoft.bootcampspringboot.excepciones.NotFoundException;
+
 import com.besysoft.bootcampspringboot.repositorios.database.IPeliculaRepository;
 import com.besysoft.bootcampspringboot.servicios.interfaces.IPeliculaService;
 import com.besysoft.bootcampspringboot.utilidades.Fecha;
@@ -73,12 +76,17 @@ public class PeliculaServiceImpl implements IPeliculaService {
     @Transactional(readOnly = true)
     @Override
     public PeliculaSerieResponseDto filtrarPeliculaTitulo(String titulo) {
-      Optional<PeliculaSerie>pelicula= repository.findPeliculaByTitulo(titulo);
-      PeliculaSerieResponseDto peliculas= peliculaMapper.mapToDto(pelicula.get());
-      return peliculas;
+        Optional<PeliculaSerie> oPelicula = repository.findPeliculaByTitulo(titulo);
 
+        if (!oPelicula.isPresent()) {
+            throw new NotFoundException(String.format("la película %s no existe", titulo),
+                    new RuntimeException("Causa Original"));}
+            Optional<PeliculaSerie> pelicula = repository.findPeliculaByTitulo(titulo);
+            PeliculaSerieResponseDto peliculas = peliculaMapper.mapToDto(pelicula.get());
+            return peliculas;
 
-    }
+        }
+
 
     @Transactional(readOnly = false)
     @Override
@@ -86,7 +94,8 @@ public class PeliculaServiceImpl implements IPeliculaService {
         Optional<PeliculaSerie> oPelicula = repository.findPeliculaByTitulo(nuevaPelicula.getTitulo());
 
         if (oPelicula.isPresent()) {
-            throw new RuntimeException("La película ingresada ya existe");
+            throw new ExistException(String.format("la pelicula %s ya existe", nuevaPelicula.getTitulo()),
+                    new RuntimeException("Causa Original"));
         }
         PeliculaSerie pelicula= repository.save(peliculaMapper.mapToEntity(nuevaPelicula));
         return peliculaMapper.mapToDto(pelicula);
@@ -99,7 +108,8 @@ public class PeliculaServiceImpl implements IPeliculaService {
         Optional<PeliculaSerie> oPelicula = repository.findById(id);
 
         if (!oPelicula.isPresent()) {
-            throw new RuntimeException("El Id ingresado no existe");
+            throw new NotFoundException(String.format("el id %s ingresado no existe", id),
+                    new RuntimeException("Causa Original"));
         }
         pelicula.setTitulo(pelicula.getTitulo());
         pelicula.setCalificacion(pelicula.getCalificacion());

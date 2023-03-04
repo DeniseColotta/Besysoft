@@ -1,12 +1,13 @@
 package com.besysoft.bootcampspringboot.dto.response;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class PeliculaSerieResponseDto {
 
     private Long id;
